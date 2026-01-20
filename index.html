@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TeamTigrr - Junior Sports Duty Management</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@300;400;500;600;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        tigrr: {
+                            orange: '#FF6B00',
+                            dark: '#111111',
+                            charcoal: '#1F1F1F',
+                            light: '#F3F4F6'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Teko', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom pattern for the Hero section */
+        .bg-pattern {
+            background-image: radial-gradient(#FF6B00 1px, transparent 1px);
+            background-size: 20px 20px;
+            opacity: 0.1;
+        }
+        
+        .clip-slant {
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+        }
+
+        .clip-slant-reverse {
+            clip-path: polygon(0 15%, 100% 0, 100% 100%, 0 100%);
+        }
+    </style>
+</head>
+<body class="bg-tigrr-dark text-white font-sans antialiased selection:bg-tigrr-orange selection:text-white">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-tigrr-dark/95 backdrop-blur-sm border-b border-gray-800 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <i class="fa-solid fa-tiger-symbol text-tigrr-orange text-3xl"></i>
+                    <span class="font-display font-bold text-3xl tracking-wide uppercase text-white">Team<span class="text-tigrr-orange">Tigrr</span></span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#problem" class="hover:text-tigrr-orange transition-colors px-3 py-2 rounded-md font-medium">Why TeamTigrr?</a>
+                        <a href="#features" class="hover:text-tigrr-orange transition-colors px-3 py-2 rounded-md font-medium">Features</a>
+                        <a href="#sports" class="hover:text-tigrr-orange transition-colors px-3 py-2 rounded-md font-medium">Sports</a>
+                        <a href="#join" class="bg-tigrr-orange hover:bg-orange-600 text-white px-5 py-2 rounded-full font-bold transition-transform hover:scale-105 transform">Get Early Access</a>
+                    </div>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="-mr-2 flex md:hidden">
+                    <button type="button" onclick="toggleMobileMenu()" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="hidden md:hidden bg-tigrr-charcoal border-b border-gray-700" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#problem" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Why TeamTigrr?</a>
+                <a href="#features" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Features</a>
+                <a href="#sports" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Sports</a>
+                <a href="#join" class="text-tigrr-orange font-bold block px-3 py-2 rounded-md text-base">Get Early Access</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="relative pt-20 overflow-hidden">
+        <div class="absolute inset-0 bg-pattern z-0"></div>
+        <div class="absolute top-0 right-0 -mt-20 -mr-20 w-96 h-96 bg-tigrr-orange rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
+        <div class="absolute bottom-0 left-0 -mb-20 -ml-20 w-96 h-96 bg-gray-600 rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32 flex flex-col md:flex-row items-center">
+            <!-- Text Content -->
+            <div class="md:w-1/2 text-center md:text-left">
+                <div class="inline-block px-4 py-1 mb-6 rounded-full bg-orange-900/30 border border-orange-500/30 text-tigrr-orange font-semibold text-sm uppercase tracking-wider">
+                    <i class="fas fa-bolt mr-2"></i> Now in Private Beta
+                </div>
+                <h1 class="text-5xl md:text-7xl font-display font-bold leading-none mb-6">
+                    Tame the <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-tigrr-orange to-yellow-500">Volunteer Chaos</span>
+                </h1>
+                <p class="mt-4 text-xl text-gray-400 max-w-lg mx-auto md:mx-0">
+                    Stop chasing parents for snack duty. Bench the spreadsheets and let TeamTigrr handle the schedule, reminders, and replacements.
+                </p>
+                
+                <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                    <a href="#join" class="bg-tigrr-orange hover:bg-orange-600 text-white px-8 py-4 rounded-lg font-bold text-lg transition-all shadow-lg shadow-orange-600/20 hover:shadow-orange-600/40 flex items-center justify-center">
+                        Start Free Trial <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                    <a href="#features" class="border border-gray-600 hover:border-gray-400 text-gray-300 hover:text-white px-8 py-4 rounded-lg font-bold text-lg transition-all flex items-center justify-center">
+                        See How It Works
+                    </a>
+                </div>
+                <p class="mt-4 text-sm text-gray-500">
+                    <i class="fas fa-check text-tigrr-orange mr-1"></i> No credit card required 
+                    <span class="mx-2">•</span> 
+                    <i class="fas fa-check text-tigrr-orange mr-1"></i> Free for early clubs
+                </p>
+            </div>
+
+            <!-- Hero Image / Visual -->
+            <div class="md:w-1/2 mt-12 md:mt-0 relative">
+                <div class="relative mx-auto w-full max-w-md lg:max-w-lg">
+                    <!-- Decorative back layers -->
+                    <div class="absolute top-0 -right-4 -left-4 h-full bg-gradient-to-r from-gray-800 to-gray-900 rounded-2xl transform rotate-6 opacity-60"></div>
+                    <div class="absolute top-0 -right-4 -left-4 h-full bg-gradient-to-r from-tigrr-orange to-orange-900 rounded-2xl transform -rotate-3 opacity-20"></div>
+                    
+                    <!-- Main Card -->
+                    <div class="relative bg-gray-800 border border-gray-700 rounded-2xl shadow-2xl overflow-hidden">
+                        <!-- Header of Fake App -->
+                        <div class="bg-gray-900 px-4 py-3 border-b border-gray-700 flex items-center justify-between">
+                            <span class="text-white font-bold"><i class="fas fa-basketball text-tigrr-orange mr-2"></i> Tigers U12 vs. Hawks</span>
+                            <span class="text-xs bg-green-500/20 text-green-400 px-2 py-1 rounded">Next Saturday</span>
+                        </div>
+                        <!-- List Items -->
+                        <div class="p-4 space-y-3">
+                            <!-- Item 1 -->
+                            <div class="flex items-center p-3 bg-gray-700/50 rounded-lg border border-gray-600">
+                                <div class="h-10 w-10 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400">
+                                    <i class="fas fa-stopwatch"></i>
+                                </div>
+                                <div class="ml-3 flex-1">
+                                    <p class="text-sm font-medium text-white">Game Clock</p>
+                                    <p class="text-xs text-gray-400">Assigned: <span class="text-white">Mike (Dad)</span></p>
+                                </div>
+                                <i class="fas fa-check-circle text-green-500"></i>
+                            </div>
+                            <!-- Item 2 -->
+                            <div class="flex items-center p-3 bg-gray-700/50 rounded-lg border border-gray-600">
+                                <div class="h-10 w-10 rounded-full bg-purple-500/20 flex items-center justify-center text-purple-400">
+                                    <i class="fas fa-book"></i>
+                                </div>
+                                <div class="ml-3 flex-1">
+                                    <p class="text-sm font-medium text-white">Scoring</p>
+                                    <p class="text-xs text-gray-400">Assigned: <span class="text-white">Sarah W.</span></p>
+                                </div>
+                                <i class="fas fa-check-circle text-green-500"></i>
+                            </div>
+                            <!-- Item 3 (Alert) -->
+                            <div class="flex items-center p-3 bg-red-900/20 rounded-lg border border-red-500/30">
+                                <div class="h-10 w-10 rounded-full bg-red-500/20 flex items-center justify-center text-red-400">
+                                    <i class="fas fa-hamburger"></i>
+                                </div>
+                                <div class="ml-3 flex-1">
+                                    <p class="text-sm font-medium text-white">Kiosk Duty</p>
+                                    <p class="text-xs text-red-300">Needs Volunteer!</p>
+                                </div>
+                                <button class="bg-red-500 hover:bg-red-600 text-white text-xs px-3 py-1 rounded transition-colors">Take</button>
+                            </div>
+                        </div>
+                        <!-- Notification Overlay simulation -->
+                        <div class="absolute bottom-4 left-4 right-4 bg-gray-900/95 backdrop-blur border border-tigrr-orange rounded-lg p-3 shadow-lg transform translate-y-2">
+                            <div class="flex items-start">
+                                <i class="fas fa-bell text-tigrr-orange mt-1"></i>
+                                <div class="ml-3">
+                                    <p class="text-sm font-bold text-white">Alert</p>
+                                    <p class="text-xs text-gray-300">John requested coverage for Sunday's game. Any takers?</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- The Problem: Excel Sheet -->
+    <div id="problem" class="bg-gray-100 text-gray-900 py-24 clip-slant relative z-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl md:text-5xl font-display font-bold mb-4 uppercase">Retire the Spreadsheet & Chat Chaos</h2>
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto mb-12">
+                Managing a junior team is hard enough. Don't spend your evenings staring at spreadsheets, scrolling through endless WhatsApp threads, and panicking when someone cancels via text last minute.
+            </p>
+
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <!-- Bad Way -->
+                <div class="relative group">
+                    <div class="absolute -top-6 -left-6 bg-red-600 text-white font-bold px-4 py-2 rounded-lg transform -rotate-12 shadow-xl z-30 animate-pulse">The Old Chaos</div>
+                    
+                    <div class="bg-white rounded-xl shadow-2xl border border-gray-300 overflow-hidden relative opacity-90 transition-all hover:scale-105 duration-300">
+                        <!-- Simulated Excel Header -->
+                        <div class="bg-[#217346] text-white p-2 text-xs font-semibold flex items-center gap-2">
+                            <i class="fas fa-file-excel"></i> Roster_U12_Final_v3_copy.xlsx
+                        </div>
+                        
+                        <!-- Excel Grid -->
+                        <div class="font-mono text-[10px] sm:text-xs overflow-x-auto bg-white border-b-4 border-gray-200">
+                            <table class="w-full text-left border-collapse">
+                                <tr class="bg-gray-100 text-gray-600">
+                                    <th class="border p-1 w-8 text-center">#</th>
+                                    <th class="border p-1">A</th>
+                                    <th class="border p-1">B</th>
+                                    <th class="border p-1">C</th>
+                                </tr>
+                                <tr>
+                                    <td class="border p-1 bg-gray-50 text-center font-bold text-gray-500">1</td>
+                                    <td class="border p-1 font-bold text-gray-800">Date</td>
+                                    <td class="border p-1 font-bold text-gray-800">Duty</td>
+                                    <td class="border p-1 font-bold text-gray-800">Status</td>
+                                </tr>
+                                <tr>
+                                    <td class="border p-1 bg-gray-50 text-center font-bold text-gray-500">2</td>
+                                    <td class="border p-1">Sat 10th</td>
+                                    <td class="border p-1">Scoring</td>
+                                    <td class="border p-1 text-red-600 font-bold">???</td>
+                                </tr>
+                                <tr>
+                                    <td class="border p-1 bg-gray-50 text-center font-bold text-gray-500">3</td>
+                                    <td class="border p-1">Sat 10th</td>
+                                    <td class="border p-1">Oranges</td>
+                                    <td class="border p-1">Mike</td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <!-- WhatsApp Overlay -->
+                        <div class="bg-[#ece5dd] p-4 h-48 relative overflow-hidden flex flex-col gap-3">
+                            <!-- Helper graphic for bg pattern -->
+                            <div class="absolute inset-0 opacity-5 bg-[url('https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/1200px-WhatsApp.svg.png')] bg-repeat bg-center bg-contain grayscale"></div>
+
+                            <!-- Message 1 -->
+                            <div class="self-start bg-white rounded-lg rounded-tl-none p-2 shadow-sm max-w-[85%] text-xs relative z-10">
+                                <div class="text-orange-800 font-bold text-[10px] mb-0.5">Coach Steve</div>
+                                <p class="text-gray-800">Guys, we still have no one for scoring tomorrow!! 😱 Who can help?</p>
+                                <span class="text-[9px] text-gray-400 block text-right mt-1">19:42</span>
+                            </div>
+
+                            <!-- Message 2 -->
+                            <div class="self-end bg-[#dcf8c6] rounded-lg rounded-tr-none p-2 shadow-sm max-w-[85%] text-xs relative z-10">
+                                <p class="text-gray-800">Sorry, working late. Ask the Smiths?</p>
+                                <span class="text-[9px] text-gray-500 block text-right mt-1">19:45 <i class="fas fa-check-double text-blue-400"></i></span>
+                            </div>
+
+                             <!-- Message 3 -->
+                            <div class="self-start bg-white rounded-lg rounded-tl-none p-2 shadow-sm max-w-[85%] text-xs relative z-10">
+                                <div class="text-purple-800 font-bold text-[10px] mb-0.5">Karen Smith</div>
+                                <p class="text-gray-800">I texted John but he hasn't replied... can someone else do it?</p>
+                                <span class="text-[9px] text-gray-400 block text-right mt-1">19:48</span>
+                            </div>
+                        </div>
+
+                        <!-- Ban Overlay -->
+                        <div class="absolute inset-0 flex items-center justify-center pointer-events-none z-20">
+                            <i class="fas fa-ban text-red-600/30 text-9xl"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Good Way -->
+                <div class="text-left space-y-6">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <div class="flex items-center justify-center h-12 w-12 rounded-md bg-tigrr-orange text-white">
+                                <i class="fas fa-users-cog text-xl"></i>
+                            </div>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="text-xl font-bold text-gray-900">Fair Assignments</h3>
+                            <p class="mt-2 text-gray-600">Track who has done what. Ensure duty is spread evenly across all families. No more favorites.</p>
+                        </div>
+                    </div>
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <div class="flex items-center justify-center h-12 w-12 rounded-md bg-tigrr-dark text-white">
+                                <i class="fas fa-robot text-xl"></i>
+                            </div>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="text-xl font-bold text-gray-900">Automated Nudges</h3>
+                            <p class="mt-2 text-gray-600">The app reminds parents 2 days and 2 hours before the game. You don't have to send a single text.</p>
+                        </div>
+                    </div>
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <div class="flex items-center justify-center h-12 w-12 rounded-md bg-gray-500 text-white">
+                                <i class="fas fa-mobile-alt text-xl"></i>
+                            </div>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="text-xl font-bold text-gray-900">Mobile First</h3>
+                            <p class="mt-2 text-gray-600">Parents check duties on their phone. It syncs to their calendar automatically.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <div id="features" class="bg-tigrr-charcoal py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-tigrr-orange font-semibold tracking-wide uppercase text-sm">Game Day Ready</h2>
+                <h2 class="text-3xl md:text-5xl font-display font-bold text-white mt-2">Built for Team Leaders</h2>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="bg-gray-800 rounded-xl p-8 border border-gray-700 hover:border-tigrr-orange transition-colors group">
+                    <div class="h-12 w-12 bg-gray-700 rounded-lg flex items-center justify-center mb-6 group-hover:bg-tigrr-orange transition-colors">
+                        <i class="fas fa-clipboard-list text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Easy Rostering</h3>
+                    <p class="text-gray-400">Drag and drop assignments for scoring, clock, and kiosk duties. Set it up for the whole season in minutes.</p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="bg-gray-800 rounded-xl p-8 border border-gray-700 hover:border-tigrr-orange transition-colors group">
+                    <div class="h-12 w-12 bg-gray-700 rounded-lg flex items-center justify-center mb-6 group-hover:bg-tigrr-orange transition-colors">
+                        <i class="fas fa-hands-helping text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Substitutions & Cover</h3>
+                    <p class="text-gray-400">Can't make it? Parents can request a swap or cover within the app. Volunteers can accept with one tap.</p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="bg-gray-800 rounded-xl p-8 border border-gray-700 hover:border-tigrr-orange transition-colors group">
+                    <div class="h-12 w-12 bg-gray-700 rounded-lg flex items-center justify-center mb-6 group-hover:bg-tigrr-orange transition-colors">
+                        <i class="fas fa-chart-pie text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Volunteer Tracking</h3>
+                    <p class="text-gray-400">See who has contributed the most hours and who is lagging behind. Reward your MVPs (Most Valuable Parents).</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sports Section -->
+    <div id="sports" class="bg-tigrr-dark py-20 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl font-display font-bold mb-12">Supported Sports</h2>
+            <div class="flex flex-wrap justify-center gap-8 md:gap-16">
+                
+                <div class="flex flex-col items-center group">
+                    <div class="w-24 h-24 rounded-full bg-gray-800 border-2 border-gray-700 group-hover:border-orange-500 group-hover:bg-orange-500/10 flex items-center justify-center transition-all duration-300">
+                        <i class="fas fa-basketball-ball text-4xl text-gray-400 group-hover:text-orange-500"></i>
+                    </div>
+                    <span class="mt-4 font-bold text-gray-300 group-hover:text-white">Basketball</span>
+                </div>
+
+                <div class="flex flex-col items-center group">
+                    <div class="w-24 h-24 rounded-full bg-gray-800 border-2 border-gray-700 group-hover:border-orange-500 group-hover:bg-orange-500/10 flex items-center justify-center transition-all duration-300">
+                        <i class="fas fa-futbol text-4xl text-gray-400 group-hover:text-orange-500"></i>
+                    </div>
+                    <span class="mt-4 font-bold text-gray-300 group-hover:text-white">Football</span>
+                </div>
+
+                <div class="flex flex-col items-center group">
+                    <div class="w-24 h-24 rounded-full bg-gray-800 border-2 border-gray-700 group-hover:border-orange-500 group-hover:bg-orange-500/10 flex items-center justify-center transition-all duration-300">
+                        <i class="fas fa-hockey-puck text-4xl text-gray-400 group-hover:text-orange-500"></i>
+                    </div>
+                    <span class="mt-4 font-bold text-gray-300 group-hover:text-white">Ice Hockey</span>
+                </div>
+
+                <div class="flex flex-col items-center group opacity-50">
+                    <div class="w-24 h-24 rounded-full bg-gray-900 border-2 border-gray-800 border-dashed flex items-center justify-center">
+                        <i class="fas fa-plus text-3xl text-gray-600"></i>
+                    </div>
+                    <span class="mt-4 font-bold text-gray-500">More Soon</span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA Section -->
+    <div id="join" class="bg-gradient-to-br from-orange-600 to-orange-800 py-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-pattern opacity-10"></div>
+        <div class="max-w-4xl mx-auto px-4 text-center relative z-10">
+            <h2 class="text-4xl md:text-6xl font-display font-bold text-white mb-6">Earn Your Stripes. Join the Beta.</h2>
+            <p class="text-orange-100 text-lg mb-8 max-w-2xl mx-auto">
+                We are currently accepting a limited number of clubs for our private beta. Get full access for free in exchange for your feedback.
+            </p>
+
+            <!-- Signup Form -->
+            <div id="signup-container" class="bg-white/10 backdrop-blur-md p-2 rounded-xl max-w-lg mx-auto border border-white/20">
+                <form id="email-form" class="flex flex-col sm:flex-row gap-2">
+                    <input 
+                        type="email" 
+                        id="email-input"
+                        required
+                        placeholder="Enter your email address" 
+                        class="flex-1 px-6 py-4 rounded-lg bg-gray-900 text-white placeholder-gray-400 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-orange-400 transition-all"
+                    >
+                    <button 
+                        type="submit" 
+                        id="submit-btn"
+                        class="bg-white text-orange-700 hover:bg-gray-100 font-bold px-8 py-4 rounded-lg transition-colors flex items-center justify-center min-w-[160px]"
+                    >
+                        <span>Request Access</span>
+                    </button>
+                </form>
+                
+                <!-- Success Message (Hidden by default) -->
+                <div id="success-message" class="hidden text-center py-4">
+                    <i class="fas fa-check-circle text-3xl text-white mb-2"></i>
+                    <h3 class="text-xl font-bold text-white">Welcome to the Team!</h3>
+                    <p class="text-orange-100 text-sm">We've added you to the priority list. Watch your inbox.</p>
+                </div>
+            </div>
+            
+            <p class="mt-4 text-orange-200 text-sm opacity-80">Join 50+ junior clubs already simplifying their weekends.</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-tigrr-dark border-t border-gray-800 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center gap-2 mb-4 md:mb-0">
+                    <i class="fa-solid fa-tiger-symbol text-tigrr-orange text-2xl"></i>
+                    <span class="font-display font-bold text-2xl text-white tracking-wide">TeamTigrr</span>
+                </div>
+                <div class="flex space-x-6 text-gray-400">
+                    <a href="#" class="hover:text-tigrr-orange transition-colors"><i class="fab fa-twitter text-xl"></i></a>
+                    <a href="#" class="hover:text-tigrr-orange transition-colors"><i class="fab fa-instagram text-xl"></i></a>
+                    <a href="#" class="hover:text-tigrr-orange transition-colors"><i class="fab fa-facebook text-xl"></i></a>
+                </div>
+            </div>
+            <div class="mt-8 border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between text-sm text-gray-500">
+                <p>&copy; 2023 TeamTigrr SaaS. All rights reserved.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-white">Privacy Policy</a>
+                    <a href="#" class="hover:text-white">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Form Handling
+        const form = document.getElementById('email-form');
+        const submitBtn = document.getElementById('submit-btn');
+        const input = document.getElementById('email-input');
+        const successMessage = document.getElementById('success-message');
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Validate (Simple check)
+            if(input.value) {
+                // Loading State
+                const originalBtnText = submitBtn.innerHTML;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+                submitBtn.classList.add('opacity-75', 'cursor-not-allowed');
+                
+                // Simulate Backend API Call
+                // Backend API Call
+                const scriptURL = 'https://script.google.com/macros/s/AKfycbzeTGB0yEaENF5Py-nkZvmwVNGsaqCZ3YTNC6Acu5r-QBi_7n6u4FWqfg-FmPg8BwE/exec';
+                const formData = new FormData();
+                formData.append('email', input.value);
+
+                fetch(scriptURL, { method: 'POST', body: formData })
+                    .then(response => {
+                        // Hide Form, Show Success
+                        form.classList.add('hidden');
+                        successMessage.classList.remove('hidden');
+                        console.log('Success!', response);
+                    })
+                    .catch(error => {
+                        console.error('Error!', error.message);
+                        // Revert button state on error so they can try again
+                        submitBtn.innerHTML = originalBtnText;
+                        submitBtn.classList.remove('opacity-75', 'cursor-not-allowed');
+                        alert('Something went wrong. Please try again.');
+                    });
+            }
+        });
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('shadow-lg');
+                navbar.classList.replace('bg-tigrr-dark/95', 'bg-tigrr-dark/100');
+            } else {
+                navbar.classList.remove('shadow-lg');
+                navbar.classList.replace('bg-tigrr-dark/100', 'bg-tigrr-dark/95');
+            }
+        });
+    </script>
+</body>
+</html>
