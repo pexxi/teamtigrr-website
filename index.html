@@ -109,25 +109,23 @@
                     <i class="fas fa-bolt mr-2"></i> Now in Private Beta
                 </div>
                 <h1 class="text-5xl md:text-7xl font-display font-bold leading-none mb-6">
-                    Tame the <br>
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-tigrr-orange to-yellow-500">Volunteer Chaos</span>
+                    Every Game Covered. <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-tigrr-orange to-yellow-500">Every Duty Handled.</span>
                 </h1>
                 <p class="mt-4 text-xl text-gray-400 max-w-lg mx-auto md:mx-0">
-                    Stop chasing parents for snack duty. Bench the spreadsheets and let TeamTigrr handle the schedule, reminders, and replacements.
+                    No more spreadsheet chaos. No more last-minute WhatsApp scrambles. TeamTigrr ensures your game-day duties are always covered.
                 </p>
                 
                 <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
                     <a href="#join" class="bg-tigrr-orange hover:bg-orange-600 text-white px-8 py-4 rounded-lg font-bold text-lg transition-all shadow-lg shadow-orange-600/20 hover:shadow-orange-600/40 flex items-center justify-center">
-                        Start Free Trial <i class="fas fa-arrow-right ml-2"></i>
+                        Get Early Access <i class="fas fa-arrow-right ml-2"></i>
                     </a>
                     <a href="#features" class="border border-gray-600 hover:border-gray-400 text-gray-300 hover:text-white px-8 py-4 rounded-lg font-bold text-lg transition-all flex items-center justify-center">
                         See How It Works
                     </a>
                 </div>
                 <p class="mt-4 text-sm text-gray-500">
-                    <i class="fas fa-check text-tigrr-orange mr-1"></i> No credit card required 
-                    <span class="mx-2">•</span> 
-                    <i class="fas fa-check text-tigrr-orange mr-1"></i> Free for early clubs
+                    <i class="fas fa-check text-tigrr-orange mr-1"></i> Free beta access for early teams
                 </p>
             </div>
 
@@ -289,7 +287,7 @@
                         </div>
                         <div class="ml-4">
                             <h3 class="text-xl font-bold text-gray-900">Fair Assignments</h3>
-                            <p class="mt-2 text-gray-600">Track who has done what. Ensure duty is spread evenly across all families. No more favorites.</p>
+                            <p class="mt-2 text-gray-600">Track who has done what. Ensure duty is spread evenly across all families.</p>
                         </div>
                     </div>
                     <div class="flex">
@@ -333,8 +331,8 @@
                     <div class="h-12 w-12 bg-gray-700 rounded-lg flex items-center justify-center mb-6 group-hover:bg-tigrr-orange transition-colors">
                         <i class="fas fa-clipboard-list text-2xl text-white"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-3">Easy Rostering</h3>
-                    <p class="text-gray-400">Drag and drop assignments for scoring, clock, and kiosk duties. Set it up for the whole season in minutes.</p>
+                    <h3 class="text-xl font-bold text-white mb-3">Quick Setup</h3>
+                    <p class="text-gray-400">Add your games and assign duties in minutes. The system tracks who's done what, so assignments stay fair across families.</p>
                 </div>
 
                 <!-- Feature 2 -->
@@ -349,10 +347,10 @@
                 <!-- Feature 3 -->
                 <div class="bg-gray-800 rounded-xl p-8 border border-gray-700 hover:border-tigrr-orange transition-colors group">
                     <div class="h-12 w-12 bg-gray-700 rounded-lg flex items-center justify-center mb-6 group-hover:bg-tigrr-orange transition-colors">
-                        <i class="fas fa-chart-pie text-2xl text-white"></i>
+                        <i class="fas fa-shield-alt text-2xl text-white"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-3">Volunteer Tracking</h3>
-                    <p class="text-gray-400">See who has contributed the most hours and who is lagging behind. Reward your MVPs (Most Valuable Parents).</p>
+                    <h3 class="text-xl font-bold text-white mb-3">Private & Secure</h3>
+                    <p class="text-gray-400">No more volunteer lists published on the club website. Contact details stay private, visible only to those who need them.</p>
                 </div>
             </div>
         </div>
@@ -406,24 +404,48 @@
             </p>
 
             <!-- Signup Form -->
-            <div id="signup-container" class="bg-white/10 backdrop-blur-md p-2 rounded-xl max-w-lg mx-auto border border-white/20">
-                <form id="email-form" class="flex flex-col sm:flex-row gap-2">
-                    <input 
-                        type="email" 
+            <div id="signup-container" class="bg-white/10 backdrop-blur-md p-4 rounded-xl max-w-lg mx-auto border border-white/20">
+                <form id="email-form" class="flex flex-col gap-3">
+                    <input
+                        type="email"
                         id="email-input"
                         required
-                        placeholder="Enter your email address" 
-                        class="flex-1 px-6 py-4 rounded-lg bg-gray-900 text-white placeholder-gray-400 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-orange-400 transition-all"
+                        placeholder="Enter your email address"
+                        class="w-full px-4 py-3 rounded-lg bg-gray-900 text-white placeholder-gray-400 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-orange-400 transition-all"
                     >
-                    <button 
-                        type="submit" 
+                    <div class="flex flex-col sm:flex-row gap-3">
+                        <select
+                            id="sport-input"
+                            required
+                            class="flex-1 pl-4 pr-10 py-3 rounded-lg bg-gray-900 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-orange-400 transition-all appearance-none bg-[url('data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2020%2020%22%20fill%3D%22%239ca3af%22%3E%3Cpath%20fill-rule%3D%22evenodd%22%20d%3D%22M5.22%208.22a.75.75%200%200%201%201.06%200L10%2011.94l3.72-3.72a.75.75%200%201%201%201.06%201.06l-4.25%204.25a.75.75%200%200%201-1.06%200L5.22%209.28a.75.75%200%200%201%200-1.06Z%22%20clip-rule%3D%22evenodd%22%2F%3E%3C%2Fsvg%3E')] bg-[length:1.5rem_1.5rem] bg-[right_0.5rem_center] bg-no-repeat"
+                        >
+                            <option value="" disabled selected>Select your sport</option>
+                            <option value="basketball">Basketball</option>
+                            <option value="football">Football</option>
+                            <option value="hockey">Ice Hockey</option>
+                            <option value="other">Other</option>
+                        </select>
+                        <select
+                            id="role-input"
+                            required
+                            class="flex-1 pl-4 pr-10 py-3 rounded-lg bg-gray-900 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-orange-400 transition-all appearance-none bg-[url('data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2020%2020%22%20fill%3D%22%239ca3af%22%3E%3Cpath%20fill-rule%3D%22evenodd%22%20d%3D%22M5.22%208.22a.75.75%200%200%201%201.06%200L10%2011.94l3.72-3.72a.75.75%200%201%201%201.06%201.06l-4.25%204.25a.75.75%200%200%201-1.06%200L5.22%209.28a.75.75%200%200%201%200-1.06Z%22%20clip-rule%3D%22evenodd%22%2F%3E%3C%2Fsvg%3E')] bg-[length:1.5rem_1.5rem] bg-[right_0.5rem_center] bg-no-repeat"
+                        >
+                            <option value="" disabled selected>Your role</option>
+                            <option value="team-leader">Team Leader</option>
+                            <option value="club-manager">Club Manager</option>
+                            <option value="parent">Parent</option>
+                            <option value="volunteer">Volunteer</option>
+                        </select>
+                    </div>
+                    <button
+                        type="submit"
                         id="submit-btn"
-                        class="bg-white text-orange-700 hover:bg-gray-100 font-bold px-8 py-4 rounded-lg transition-colors flex items-center justify-center min-w-[160px]"
+                        class="w-full bg-white text-orange-700 hover:bg-gray-100 font-bold px-8 py-4 rounded-lg transition-colors flex items-center justify-center"
                     >
-                        <span>Request Access</span>
+                        <span>Join the Waitlist</span>
                     </button>
                 </form>
-                
+
                 <!-- Success Message (Hidden by default) -->
                 <div id="success-message" class="hidden text-center py-4">
                     <i class="fas fa-check-circle text-3xl text-white mb-2"></i>
@@ -432,7 +454,7 @@
                 </div>
             </div>
             
-            <p class="mt-4 text-orange-200 text-sm opacity-80">Join 50+ junior clubs already simplifying their weekends.</p>
+            <p class="mt-4 text-orange-200 text-sm opacity-80">Be among the first teams to simplify your game-day operations.</p>
         </div>
     </div>
 
@@ -451,7 +473,7 @@
                 </div>
             </div>
             <div class="mt-8 border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between text-sm text-gray-500">
-                <p>&copy; 2023 TeamTigrr SaaS. All rights reserved.</p>
+                <p>&copy; 2026 TeamTigrr. All rights reserved.</p>
                 <div class="flex space-x-6 mt-4 md:mt-0">
                     <a href="#" class="hover:text-white">Privacy Policy</a>
                     <a href="#" class="hover:text-white">Terms of Service</a>
@@ -471,24 +493,27 @@
         // Form Handling
         const form = document.getElementById('email-form');
         const submitBtn = document.getElementById('submit-btn');
-        const input = document.getElementById('email-input');
+        const emailInput = document.getElementById('email-input');
+        const sportInput = document.getElementById('sport-input');
+        const roleInput = document.getElementById('role-input');
         const successMessage = document.getElementById('success-message');
 
         form.addEventListener('submit', (e) => {
             e.preventDefault();
-            
-            // Validate (Simple check)
-            if(input.value) {
+
+            // Validate
+            if(emailInput.value && sportInput.value && roleInput.value) {
                 // Loading State
                 const originalBtnText = submitBtn.innerHTML;
                 submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
                 submitBtn.classList.add('opacity-75', 'cursor-not-allowed');
-                
-                // Simulate Backend API Call
+
                 // Backend API Call
                 const scriptURL = 'https://script.google.com/macros/s/AKfycbzeTGB0yEaENF5Py-nkZvmwVNGsaqCZ3YTNC6Acu5r-QBi_7n6u4FWqfg-FmPg8BwE/exec';
                 const formData = new FormData();
-                formData.append('email', input.value);
+                formData.append('email', emailInput.value);
+                formData.append('sport', sportInput.value);
+                formData.append('role', roleInput.value);
 
                 fetch(scriptURL, { method: 'POST', body: formData })
                     .then(response => {
