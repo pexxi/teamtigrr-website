@@ -28,10 +28,11 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. Privacy protection appears in hero section or immediately below
   4. Swap system explanation shows "one request reaches all" benefit clearly
   5. Tone feels sporty and energetic (active verbs, positive language)
-**Plans**: TBD
+**Plans**: 2 plans in 2 waves
 
 Plans:
-- [ ] 01-01: [To be defined during planning]
+- [ ] 01-01-PLAN.md — Hero, problem section, and feature cards rewrite
+- [ ] 01-02-PLAN.md — Privacy section, swap explanation, CTAs, verification
 
 ### Phase 2: Content Sections
 **Goal**: Missing table stakes content exists (FAQ, social proof, how-it-works flow)
@@ -67,7 +68,7 @@ Phases execute in numeric order: 1 -> 2 -> 3
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Messaging & Copy | 0/TBD | Not started | - |
+| 1. Messaging & Copy | 0/2 | Planned | - |
 | 2. Content Sections | 0/TBD | Not started | - |
 | 3. Performance & Polish | 0/TBD | Not started | - |
 
