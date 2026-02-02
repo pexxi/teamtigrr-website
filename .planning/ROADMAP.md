@@ -12,7 +12,7 @@ This roadmap transforms the TeamTigrr landing page from problem-focused messagin
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Messaging & Copy** - Reframe to benefit-focused, elevate privacy, positive tone
+- [x] **Phase 1: Messaging & Copy** - Reframe to benefit-focused, elevate privacy, positive tone
 - [ ] **Phase 2: Content Sections** - Add FAQ, social proof, how-it-works visual flow
 - [ ] **Phase 3: Performance & Polish** - Mobile verification and load time optimization
 
@@ -31,8 +31,8 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Plans**: 2 plans in 2 waves
 
 Plans:
-- [ ] 01-01-PLAN.md — Hero, problem section, and feature cards rewrite
-- [ ] 01-02-PLAN.md — Privacy section, swap explanation, CTAs, verification
+- [x] 01-01-PLAN.md — Hero, problem section, and feature cards rewrite
+- [x] 01-02-PLAN.md — Privacy section, swap explanation, CTAs, verification
 
 ### Phase 2: Content Sections
 **Goal**: Missing table stakes content exists (FAQ, social proof, how-it-works flow)
@@ -68,7 +68,7 @@ Phases execute in numeric order: 1 -> 2 -> 3
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Messaging & Copy | 0/2 | Planned | - |
+| 1. Messaging & Copy | 2/2 | Complete | 2026-02-02 |
 | 2. Content Sections | 0/TBD | Not started | - |
 | 3. Performance & Polish | 0/TBD | Not started | - |
 

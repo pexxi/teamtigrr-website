@@ -9,10 +9,10 @@ Requirements for landing page refresh. Each maps to roadmap phases.
 
 ### Copy & Messaging
 
-- [ ] **COPY-01**: Hero headline is benefit-focused and outcome-driven (not problem-focused)
-- [ ] **COPY-02**: All copy uses positive framing (lead with benefits, not pain points)
-- [ ] **COPY-03**: Privacy protection is elevated to prominent position (hero or near top)
-- [ ] **COPY-04**: Fair swap system messaging explains one request reaches all volunteers
+- [x] **COPY-01**: Hero headline is benefit-focused and outcome-driven (not problem-focused)
+- [x] **COPY-02**: All copy uses positive framing (lead with benefits, not pain points)
+- [x] **COPY-03**: Privacy protection is elevated to prominent position (hero or near top)
+- [x] **COPY-04**: Fair swap system messaging explains one request reaches all volunteers
 
 ### Content Sections
 
@@ -64,10 +64,10 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| COPY-01 | Phase 1 | Pending |
-| COPY-02 | Phase 1 | Pending |
-| COPY-03 | Phase 1 | Pending |
-| COPY-04 | Phase 1 | Pending |
+| COPY-01 | Phase 1 | Complete |
+| COPY-02 | Phase 1 | Complete |
+| COPY-03 | Phase 1 | Complete |
+| COPY-04 | Phase 1 | Complete |
 | CONT-01 | Phase 2 | Pending |
 | CONT-02 | Phase 2 | Pending |
 | CONT-03 | Phase 2 | Pending |
