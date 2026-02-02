@@ -64,21 +64,21 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| COPY-01 | Pending | Pending |
-| COPY-02 | Pending | Pending |
-| COPY-03 | Pending | Pending |
-| COPY-04 | Pending | Pending |
-| CONT-01 | Pending | Pending |
-| CONT-02 | Pending | Pending |
-| CONT-03 | Pending | Pending |
-| PERF-01 | Pending | Pending |
-| PERF-02 | Pending | Pending |
+| COPY-01 | Phase 1 | Pending |
+| COPY-02 | Phase 1 | Pending |
+| COPY-03 | Phase 1 | Pending |
+| COPY-04 | Phase 1 | Pending |
+| CONT-01 | Phase 2 | Pending |
+| CONT-02 | Phase 2 | Pending |
+| CONT-03 | Phase 2 | Pending |
+| PERF-01 | Phase 3 | Pending |
+| PERF-02 | Phase 3 | Pending |
 
 **Coverage:**
 - v1 requirements: 9 total
-- Mapped to phases: 0
-- Unmapped: 9 (will be mapped during roadmap creation)
+- Mapped to phases: 9
+- Unmapped: 0
 
 ---
 *Requirements defined: 2025-02-02*
-*Last updated: 2025-02-02 after initial definition*
+*Last updated: 2026-02-02 after roadmap creation*
