@@ -38,6 +38,24 @@
     </script>
 
     <style>
+        /* Global overflow protection */
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        /* Ensure media doesn't overflow */
+        img, video, iframe, svg {
+            max-width: 100%;
+            height: auto;
+        }
+
         /* Custom pattern for the Hero section */
         .bg-pattern {
             background-image: radial-gradient(#FF6B00 1px, transparent 1px);
@@ -228,8 +246,8 @@
 
             <div class="grid md:grid-cols-2 gap-12 items-center">
                 <!-- Before -->
-                <div class="relative group">
-                    <div class="absolute -top-6 -left-6 bg-gray-500 text-white font-bold px-4 py-2 rounded-lg transform -rotate-12 shadow-xl z-30">Before</div>
+                <div class="relative group overflow-visible">
+                    <div class="absolute -top-6 left-0 sm:-left-6 bg-gray-500 text-white font-bold px-4 py-2 rounded-lg transform -rotate-12 shadow-xl z-30">Before</div>
 
                     <div class="bg-white rounded-xl shadow-2xl border border-gray-300 overflow-hidden relative opacity-70 transition-all hover:scale-105 duration-300">
                         <!-- Simulated Excel Header -->
