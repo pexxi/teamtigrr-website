@@ -42,10 +42,11 @@ Plans:
   1. FAQ section answers 4-6 questions addressing cost, setup, privacy, switching concerns
   2. Social proof element visible near top of page ("Built by sports parents" or similar)
   3. "How It Works" shows 3-step visual process that makes the product feel simple
-**Plans**: TBD
+**Plans**: 2 plans in 2 waves
 
 Plans:
-- [ ] 02-01: [To be defined during planning]
+- [ ] 02-01-PLAN.md — Add social proof, how-it-works, and FAQ sections
+- [ ] 02-02-PLAN.md — Update navigation, visual verification
 
 ### Phase 3: Performance & Polish
 **Goal**: Page performs well on mobile devices and loads fast
@@ -69,9 +70,9 @@ Phases execute in numeric order: 1 -> 2 -> 3
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Messaging & Copy | 2/2 | Complete | 2026-02-02 |
-| 2. Content Sections | 0/TBD | Not started | - |
+| 2. Content Sections | 0/2 | Planned | - |
 | 3. Performance & Polish | 0/TBD | Not started | - |
 
 ---
 *Roadmap created: 2026-02-02*
-*Last updated: 2026-02-02*
+*Last updated: 2026-02-03*
