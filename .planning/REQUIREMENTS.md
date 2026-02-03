@@ -16,9 +16,9 @@ Requirements for landing page refresh. Each maps to roadmap phases.
 
 ### Content Sections
 
-- [ ] **CONT-01**: FAQ section addresses 4-6 common objections (cost, setup time, privacy, switching)
-- [ ] **CONT-02**: Social proof placeholder ready for testimonials ("Built by sports parents" or similar)
-- [ ] **CONT-03**: "How It Works" 3-step visual process flow
+- [x] **CONT-01**: FAQ section addresses 4-6 common objections (cost, setup time, privacy, switching)
+- [x] **CONT-02**: Social proof placeholder ready for testimonials ("Built by sports parents" or similar)
+- [x] **CONT-03**: "How It Works" 3-step visual process flow
 
 ### Performance
 
@@ -68,9 +68,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 | COPY-02 | Phase 1 | Complete |
 | COPY-03 | Phase 1 | Complete |
 | COPY-04 | Phase 1 | Complete |
-| CONT-01 | Phase 2 | Pending |
-| CONT-02 | Phase 2 | Pending |
-| CONT-03 | Phase 2 | Pending |
+| CONT-01 | Phase 2 | Complete |
+| CONT-02 | Phase 2 | Complete |
+| CONT-03 | Phase 2 | Complete |
 | PERF-01 | Phase 3 | Pending |
 | PERF-02 | Phase 3 | Pending |
 
