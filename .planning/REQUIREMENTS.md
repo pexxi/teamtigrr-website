@@ -22,8 +22,8 @@ Requirements for landing page refresh. Each maps to roadmap phases.
 
 ### Performance
 
-- [ ] **PERF-01**: Mobile-first responsive design verified across devices
-- [ ] **PERF-02**: Page load time under 2.5 seconds (LCP metric)
+- [x] **PERF-01**: Mobile-first responsive design verified across devices
+- [x] **PERF-02**: Page load time under 2.5 seconds (LCP metric)
 
 ## v2 Requirements
 
@@ -71,8 +71,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 | CONT-01 | Phase 2 | Complete |
 | CONT-02 | Phase 2 | Complete |
 | CONT-03 | Phase 2 | Complete |
-| PERF-01 | Phase 3 | Pending |
-| PERF-02 | Phase 3 | Pending |
+| PERF-01 | Phase 3 | Complete |
+| PERF-02 | Phase 3 | Complete |
 
 **Coverage:**
 - v1 requirements: 9 total
@@ -81,4 +81,4 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 ---
 *Requirements defined: 2025-02-02*
-*Last updated: 2026-02-02 after roadmap creation*
+*Last updated: 2026-02-03 after phase 3 completion*
