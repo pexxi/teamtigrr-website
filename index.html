@@ -64,11 +64,37 @@
         }
         
         .clip-slant {
-            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+            /* Mobile: smaller slant (5% = ~50px on typical mobile) */
+            clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%);
+        }
+
+        @media (min-width: 640px) {
+            .clip-slant {
+                /* Desktop: more dramatic slant */
+                clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .clip-slant {
+                clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+            }
         }
 
         .clip-slant-reverse {
-            clip-path: polygon(0 15%, 100% 0, 100% 100%, 0 100%);
+            clip-path: polygon(0 5%, 100% 0, 100% 100%, 0 100%);
+        }
+
+        @media (min-width: 640px) {
+            .clip-slant-reverse {
+                clip-path: polygon(0 10%, 100% 0, 100% 100%, 0 100%);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .clip-slant-reverse {
+                clip-path: polygon(0 15%, 100% 0, 100% 100%, 0 100%);
+            }
         }
 
         /* Hide default details marker in all browsers */
