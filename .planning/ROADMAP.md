@@ -57,10 +57,11 @@ Plans:
   2. All CTAs have minimum 44x44px tap targets on mobile
   3. Lighthouse Performance score 90+ on mobile 3G simulation
   4. Largest Contentful Paint under 2.5 seconds
-**Plans**: TBD
+**Plans**: 2 plans in 2 waves
 
 Plans:
-- [ ] 03-01: [To be defined during planning]
+- [ ] 03-01-PLAN.md — Remove Font Awesome CDN, replace with inline SVG, optimize fonts
+- [ ] 03-02-PLAN.md — Mobile responsive fixes, tap targets, Lighthouse verification
 
 ## Progress
 
@@ -71,7 +72,7 @@ Phases execute in numeric order: 1 -> 2 -> 3
 |-------|----------------|--------|-----------|
 | 1. Messaging & Copy | 2/2 | Complete | 2026-02-02 |
 | 2. Content Sections | 2/2 | Complete | 2026-02-03 |
-| 3. Performance & Polish | 0/TBD | Not started | - |
+| 3. Performance & Polish | 0/2 | Not started | - |
 
 ---
 *Roadmap created: 2026-02-02*
