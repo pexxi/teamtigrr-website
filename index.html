@@ -4,14 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TeamTigrr - Junior Sports Duty Management</title>
-
+    
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-
+    
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@500;600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@300;400;500;600;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <script>
         tailwind.config = {
@@ -41,7 +44,7 @@
             background-size: 20px 20px;
             opacity: 0.1;
         }
-
+        
         .clip-slant {
             clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
         }
@@ -57,15 +60,6 @@
         details summary::marker {
             display: none;
         }
-
-        /* Spinner animation for form loading */
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        .animate-spin {
-            animation: spin 1s linear infinite;
-        }
     </style>
 </head>
 <body class="bg-tigrr-dark text-white font-sans antialiased selection:bg-tigrr-orange selection:text-white">
@@ -76,12 +70,10 @@
             <div class="flex items-center justify-between h-20">
                 <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer" onclick="window.scrollTo(0,0)">
-                    <svg class="w-8 h-8 text-tigrr-orange" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
-                    </svg>
+                    <i class="fa-solid fa-tiger-symbol text-tigrr-orange text-3xl"></i>
                     <span class="font-display font-bold text-3xl tracking-wide uppercase text-white">Team<span class="text-tigrr-orange">Tigrr</span></span>
                 </div>
-
+                
                 <!-- Desktop Menu -->
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-8">
@@ -97,9 +89,7 @@
                 <!-- Mobile menu button -->
                 <div class="-mr-2 flex md:hidden">
                     <button type="button" onclick="toggleMobileMenu()" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-                        </svg>
+                        <i class="fas fa-bars text-xl"></i>
                     </button>
                 </div>
             </div>
@@ -128,10 +118,7 @@
             <!-- Text Content -->
             <div class="md:w-1/2 text-center md:text-left">
                 <div class="inline-block px-4 py-1 mb-6 rounded-full bg-orange-900/30 border border-orange-500/30 text-tigrr-orange font-semibold text-sm uppercase tracking-wider">
-                    <svg class="w-4 h-4 inline-block mr-2 -mt-0.5" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M11 21h-1l1-7H7.5c-.58 0-.57-.32-.38-.66.19-.34.05-.08.07-.12C8.48 10.94 10.42 7.54 13 3h1l-1 7h3.5c.49 0 .56.33.47.51l-.07.15C12.96 17.55 11 21 11 21z"/>
-                    </svg>
-                    Now in Private Beta
+                    <i class="fas fa-bolt mr-2"></i> Now in Private Beta
                 </div>
                 <h1 class="text-5xl md:text-7xl font-display font-bold leading-none mb-6">
                     Duties Handled, <br>
@@ -140,23 +127,17 @@
                 <p class="mt-4 text-xl text-gray-400 max-w-lg mx-auto md:mx-0">
                     Duty scheduling for sports teams that actually works. Send one request, get instant responses, and keep every game covered.
                 </p>
-
+                
                 <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
                     <a href="#join" class="bg-tigrr-orange hover:bg-orange-600 text-white px-8 py-4 rounded-lg font-bold text-lg transition-all shadow-lg shadow-orange-600/20 hover:shadow-orange-600/40 flex items-center justify-center">
-                        Get Early Access
-                        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
-                        </svg>
+                        Get Early Access <i class="fas fa-arrow-right ml-2"></i>
                     </a>
                     <a href="#features" class="border border-gray-600 hover:border-gray-400 text-gray-300 hover:text-white px-8 py-4 rounded-lg font-bold text-lg transition-all flex items-center justify-center">
                         See How It Works
                     </a>
                 </div>
                 <p class="mt-4 text-sm text-gray-500">
-                    <svg class="w-4 h-4 inline-block text-tigrr-orange mr-1 -mt-0.5" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
-                    </svg>
-                    Free beta access for early teams
+                    <i class="fas fa-check text-tigrr-orange mr-1"></i> Free beta access for early teams
                 </p>
             </div>
 
@@ -166,17 +147,12 @@
                     <!-- Decorative back layers -->
                     <div class="absolute top-0 -right-4 -left-4 h-full bg-gradient-to-r from-gray-800 to-gray-900 rounded-2xl transform rotate-6 opacity-60"></div>
                     <div class="absolute top-0 -right-4 -left-4 h-full bg-gradient-to-r from-tigrr-orange to-orange-900 rounded-2xl transform -rotate-3 opacity-20"></div>
-
+                    
                     <!-- Main Card -->
                     <div class="relative bg-gray-800 border border-gray-700 rounded-2xl shadow-2xl overflow-hidden">
                         <!-- Header of Fake App -->
                         <div class="bg-gray-900 px-4 py-3 border-b border-gray-700 flex items-center justify-between">
-                            <span class="text-white font-bold">
-                                <svg class="w-5 h-5 inline-block text-tigrr-orange mr-2 -mt-0.5" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-5.5-2.5l7.51-3.49L17.5 6.5 9.99 9.99 6.5 17.5zm5.5-6.6c.61 0 1.1.49 1.1 1.1s-.49 1.1-1.1 1.1-1.1-.49-1.1-1.1.49-1.1 1.1-1.1z"/>
-                                </svg>
-                                Tigers U12 vs. Hawks
-                            </span>
+                            <span class="text-white font-bold"><i class="fas fa-basketball text-tigrr-orange mr-2"></i> Tigers U12 vs. Hawks</span>
                             <span class="text-xs bg-green-500/20 text-green-400 px-2 py-1 rounded">Next Saturday</span>
                         </div>
                         <!-- List Items -->
@@ -184,39 +160,29 @@
                             <!-- Item 1 -->
                             <div class="flex items-center p-3 bg-gray-700/50 rounded-lg border border-gray-600">
                                 <div class="h-10 w-10 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400">
-                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M15 1H9v2h6V1zm-4 13h2V8h-2v6zm8.03-6.61l1.42-1.42c-.43-.51-.9-.99-1.41-1.41l-1.42 1.42C16.07 4.74 14.12 4 12 4c-4.97 0-9 4.03-9 9s4.02 9 9 9 9-4.03 9-9c0-2.12-.74-4.07-1.97-5.61zM12 20c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/>
-                                    </svg>
+                                    <i class="fas fa-stopwatch"></i>
                                 </div>
                                 <div class="ml-3 flex-1">
                                     <p class="text-sm font-medium text-white">Game Clock</p>
                                     <p class="text-xs text-gray-400">Assigned: <span class="text-white">Mike (Dad)</span></p>
                                 </div>
-                                <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                                </svg>
+                                <i class="fas fa-check-circle text-green-500"></i>
                             </div>
                             <!-- Item 2 -->
                             <div class="flex items-center p-3 bg-gray-700/50 rounded-lg border border-gray-600">
                                 <div class="h-10 w-10 rounded-full bg-purple-500/20 flex items-center justify-center text-purple-400">
-                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/>
-                                    </svg>
+                                    <i class="fas fa-book"></i>
                                 </div>
                                 <div class="ml-3 flex-1">
                                     <p class="text-sm font-medium text-white">Scoring</p>
                                     <p class="text-xs text-gray-400">Assigned: <span class="text-white">Sarah W.</span></p>
                                 </div>
-                                <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                                </svg>
+                                <i class="fas fa-check-circle text-green-500"></i>
                             </div>
                             <!-- Item 3 (Alert) -->
                             <div class="flex items-center p-3 bg-red-900/20 rounded-lg border border-red-500/30">
                                 <div class="h-10 w-10 rounded-full bg-red-500/20 flex items-center justify-center text-red-400">
-                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M18.06 22.99h1.66c.84 0 1.53-.64 1.63-1.46L23 5.05l-5 2.18V3c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v4.23L1 5.05l1.65 16.48c.1.82.79 1.46 1.63 1.46h1.66c-.45-1.73-.15-3.58.83-5.12l2.01-3.04 1.22.73V19c0 1.66 1.34 3 3 3s3-1.34 3-3v-3.44l1.22-.73 2.01 3.04c.98 1.54 1.28 3.39.83 5.12zM10 3h4v5l-2 1-2-1V3z"/>
-                                    </svg>
+                                    <i class="fas fa-hamburger"></i>
                                 </div>
                                 <div class="ml-3 flex-1">
                                     <p class="text-sm font-medium text-white">Kiosk Duty</p>
@@ -228,9 +194,7 @@
                         <!-- Notification Overlay simulation -->
                         <div class="absolute bottom-4 left-4 right-4 bg-gray-900/95 backdrop-blur border border-tigrr-orange rounded-lg p-3 shadow-lg transform translate-y-2">
                             <div class="flex items-start">
-                                <svg class="w-5 h-5 text-tigrr-orange mt-0.5" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/>
-                                </svg>
+                                <i class="fas fa-bell text-tigrr-orange mt-1"></i>
                                 <div class="ml-3">
                                     <p class="text-sm font-bold text-white">Alert</p>
                                     <p class="text-xs text-gray-300">John requested coverage for Sunday's game. Any takers?</p>
@@ -247,9 +211,7 @@
     <div class="bg-tigrr-charcoal border-y border-gray-800 py-6">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <p class="text-gray-400 text-lg">
-                <svg class="w-5 h-5 inline-block text-tigrr-orange mr-2 -mt-0.5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                </svg>
+                <i class="fas fa-heart text-tigrr-orange mr-2"></i>
                 <span class="text-white font-semibold">Built by sports parents</span>
                 who were tired of the spreadsheet shuffle
             </p>
@@ -272,12 +234,9 @@
                     <div class="bg-white rounded-xl shadow-2xl border border-gray-300 overflow-hidden relative opacity-70 transition-all hover:scale-105 duration-300">
                         <!-- Simulated Excel Header -->
                         <div class="bg-[#217346] text-white p-2 text-xs font-semibold flex items-center gap-2">
-                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
-                            </svg>
-                            Roster_U12_Final_v3_copy.xlsx
+                            <i class="fas fa-file-excel"></i> Roster_U12_Final_v3_copy.xlsx
                         </div>
-
+                        
                         <!-- Excel Grid -->
                         <div class="font-mono text-[10px] sm:text-xs overflow-x-auto bg-white border-b-4 border-gray-200">
                             <table class="w-full text-left border-collapse">
@@ -316,18 +275,14 @@
                             <!-- Message 1 -->
                             <div class="self-start bg-white rounded-lg rounded-tl-none p-2 shadow-sm max-w-[85%] text-xs relative z-10">
                                 <div class="text-orange-800 font-bold text-[10px] mb-0.5">Coach Steve</div>
-                                <p class="text-gray-800">Guys, we still have no one for scoring tomorrow!! Who can help?</p>
+                                <p class="text-gray-800">Guys, we still have no one for scoring tomorrow!! 😱 Who can help?</p>
                                 <span class="text-[9px] text-gray-400 block text-right mt-1">19:42</span>
                             </div>
 
                             <!-- Message 2 -->
                             <div class="self-end bg-[#dcf8c6] rounded-lg rounded-tr-none p-2 shadow-sm max-w-[85%] text-xs relative z-10">
                                 <p class="text-gray-800">Sorry, working late. Ask the Smiths?</p>
-                                <span class="text-[9px] text-gray-500 block text-right mt-1">19:45
-                                    <svg class="w-3 h-3 inline-block text-blue-400 ml-0.5" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M18 7l-1.41-1.41-6.34 6.34 1.41 1.41L18 7zm4.24-1.41L11.66 16.17 7.48 12l-1.41 1.41L11.66 19l12-12-1.42-1.41zM.41 13.41L6 19l1.41-1.41L1.83 12 .41 13.41z"/>
-                                    </svg>
-                                </span>
+                                <span class="text-[9px] text-gray-500 block text-right mt-1">19:45 <i class="fas fa-check-double text-blue-400"></i></span>
                             </div>
 
                              <!-- Message 3 -->
@@ -346,9 +301,7 @@
                     <div class="flex">
                         <div class="flex-shrink-0">
                             <div class="flex items-center justify-center h-12 w-12 rounded-md bg-tigrr-orange text-white">
-                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-2 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4zm10-6v-2h-2v2h-2v2h2v2h2v-2h2v-2h-2z"/>
-                                </svg>
+                                <i class="fas fa-users-cog text-xl"></i>
                             </div>
                         </div>
                         <div class="ml-4">
@@ -359,9 +312,7 @@
                     <div class="flex">
                         <div class="flex-shrink-0">
                             <div class="flex items-center justify-center h-12 w-12 rounded-md bg-tigrr-dark text-white">
-                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M20 9V7c0-1.1-.9-2-2-2h-3c0-1.66-1.34-3-3-3S9 3.34 9 5H6c-1.1 0-2 .9-2 2v2c-1.66 0-3 1.34-3 3s1.34 3 3 3v4c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-4c1.66 0 3-1.34 3-3s-1.34-3-3-3zM7.5 11.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5S9.83 13 9 13s-1.5-.67-1.5-1.5zM16 17H8v-2h8v2zm-1-4c-.83 0-1.5-.67-1.5-1.5S14.17 10 15 10s1.5.67 1.5 1.5S15.83 13 15 13z"/>
-                                </svg>
+                                <i class="fas fa-robot text-xl"></i>
                             </div>
                         </div>
                         <div class="ml-4">
@@ -372,9 +323,7 @@
                     <div class="flex">
                         <div class="flex-shrink-0">
                             <div class="flex items-center justify-center h-12 w-12 rounded-md bg-gray-500 text-white">
-                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M15.5 1h-8C6.12 1 5 2.12 5 3.5v17C5 21.88 6.12 23 7.5 23h8c1.38 0 2.5-1.12 2.5-2.5v-17C18 2.12 16.88 1 15.5 1zm-4 21c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm4.5-4H7V4h9v14z"/>
-                                </svg>
+                                <i class="fas fa-mobile-alt text-xl"></i>
                             </div>
                         </div>
                         <div class="ml-4">
@@ -431,9 +380,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="max-w-3xl mx-auto text-center">
                 <div class="inline-block p-4 bg-gray-800 rounded-full mb-6">
-                    <svg class="w-8 h-8 text-tigrr-orange" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/>
-                    </svg>
+                    <i class="fas fa-shield-alt text-3xl text-tigrr-orange"></i>
                 </div>
                 <h2 class="text-3xl md:text-4xl font-display font-bold text-white mb-4">Your Info Stays Yours</h2>
                 <p class="text-xl text-gray-400">
@@ -456,9 +403,7 @@
                 <!-- Feature 1: Quick Setup -->
                 <div class="bg-gray-800 rounded-xl p-8 border border-gray-700 hover:border-tigrr-orange transition-colors group">
                     <div class="h-12 w-12 bg-gray-700 rounded-lg flex items-center justify-center mb-6 group-hover:bg-tigrr-orange transition-colors">
-                        <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
-                        </svg>
+                        <i class="fas fa-clipboard-list text-2xl text-white"></i>
                     </div>
                     <h3 class="text-xl font-bold text-white mb-3">Ready in Minutes</h3>
                     <p class="text-gray-400">Add your games, assign duties, done. Fair assignments happen automatically - no spreadsheet formulas required.</p>
@@ -467,9 +412,7 @@
                 <!-- Feature 2: Swaps -->
                 <div class="bg-gray-800 rounded-xl p-8 border border-gray-700 hover:border-tigrr-orange transition-colors group">
                     <div class="h-12 w-12 bg-gray-700 rounded-lg flex items-center justify-center mb-6 group-hover:bg-tigrr-orange transition-colors">
-                        <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12.5 2C9.46 2 6.68 3.4 5.17 5.7L3.71 4.24l-.7.7 2.82 2.83 2.83-2.83-.71-.7L6.48 5.7C7.82 3.65 10.05 2.5 12.5 2.5c4.14 0 7.5 3.36 7.5 7.5 0 1.95-.75 3.73-1.97 5.07l.71.71C20.1 14.24 21 12.21 21 10c0-4.69-3.81-8.5-8.5-8.5zM11.5 22c3.04 0 5.82-1.4 7.33-3.7l1.46 1.46.7-.7-2.82-2.83-2.83 2.83.71.7 1.47-1.46c-1.34 2.05-3.57 3.2-6.02 3.2-4.14 0-7.5-3.36-7.5-7.5 0-1.95.75-3.73 1.97-5.07l-.71-.71C3.9 9.76 3 11.79 3 14c0 4.69 3.81 8.5 8.5 8.5z"/>
-                        </svg>
+                        <i class="fas fa-hands-helping text-2xl text-white"></i>
                     </div>
                     <h3 class="text-xl font-bold text-white mb-3">Swaps Made Simple</h3>
                     <p class="text-gray-400">Can't make it? One tap sends a request to all available parents. Swap duties with another parent or find a volunteer - everyone gets an equal chance to help out. No more texting people one by one hoping someone says yes.</p>
@@ -483,39 +426,31 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 class="text-3xl font-display font-bold mb-12">Supported Sports</h2>
             <div class="flex flex-wrap justify-center gap-8 md:gap-16">
-
+                
                 <div class="flex flex-col items-center group">
                     <div class="w-24 h-24 rounded-full bg-gray-800 border-2 border-gray-700 group-hover:border-orange-500 group-hover:bg-orange-500/10 flex items-center justify-center transition-all duration-300">
-                        <svg class="w-10 h-10 text-gray-400 group-hover:text-orange-500" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-.52.07-1.06.07-1.58.07-.49 0-.98-.03-1.46-.08-.09-.33-.17-.67-.22-1.02-.25-1.56.07-3.25 1.26-4.9.54.47 1.25.73 2 .73s1.46-.26 2-.73c1.19 1.65 1.51 3.34 1.26 4.9-.05.35-.13.69-.22 1.02-.48.05-.97.08-1.46.08-.52 0-1.06 0-1.58-.07zM12 13c-1.1 0-2-.9-2-2 0-.37.11-.71.29-1.01C10.65 9.36 11.3 9 12 9s1.35.36 1.71.99c.18.3.29.64.29 1.01 0 1.1-.9 2-2 2zm7.93-1h-1.51c-.04-.47-.13-.93-.25-1.38.63-.24 1.18-.57 1.64-.99.14.75.22 1.55.12 2.37zm-2.27-4.35c-.35.33-.77.6-1.22.81-.37-.55-.82-1.05-1.32-1.5.94-.01 1.77.24 2.54.69zM12 4.07c.73.16 1.42.44 2.05.81-.42.31-.8.67-1.13 1.08-.29-.1-.6-.16-.92-.16s-.63.06-.92.16c-.33-.41-.71-.77-1.13-1.08.63-.37 1.32-.65 2.05-.81zm-3.44 1.39c-.5.45-.95.95-1.32 1.5-.45-.21-.87-.48-1.22-.81.77-.45 1.6-.7 2.54-.69zM5.63 7.62c.46.42 1.01.75 1.64.99-.12.45-.21.91-.25 1.38H5.51c-.1-.82-.02-1.62.12-2.37zm-.12 4.37h1.51c.04.47.13.93.25 1.38-.63.24-1.18.57-1.64.99-.14-.75-.22-1.55-.12-2.37zm2.27 4.35c.35-.33.77-.6 1.22-.81.37.55.82 1.05 1.32 1.5-.94.01-1.77-.24-2.54-.69zm8.85.69c-.5-.45-.95-.95-1.32-1.5.45.21.87.48 1.22.81-.77.45-1.6.7-2.54.69.5-.45.95-.95 1.32-1.5.45.21.87.48 1.22.81zm1.74-2.06c-.46-.42-1.01-.75-1.64-.99.12-.45.21-.91.25-1.38h1.51c.1.82.02 1.62-.12 2.37z"/>
-                        </svg>
+                        <i class="fas fa-basketball-ball text-4xl text-gray-400 group-hover:text-orange-500"></i>
                     </div>
                     <span class="mt-4 font-bold text-gray-300 group-hover:text-white">Basketball</span>
                 </div>
 
                 <div class="flex flex-col items-center group">
                     <div class="w-24 h-24 rounded-full bg-gray-800 border-2 border-gray-700 group-hover:border-orange-500 group-hover:bg-orange-500/10 flex items-center justify-center transition-all duration-300">
-                        <svg class="w-10 h-10 text-gray-400 group-hover:text-orange-500" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.94-.49-7-3.85-7-7.93s3.06-7.44 7-7.93v15.86zm2 0V4.07c3.94.49 7 3.85 7 7.93s-3.06 7.44-7 7.93z"/>
-                        </svg>
+                        <i class="fas fa-futbol text-4xl text-gray-400 group-hover:text-orange-500"></i>
                     </div>
                     <span class="mt-4 font-bold text-gray-300 group-hover:text-white">Football</span>
                 </div>
 
                 <div class="flex flex-col items-center group">
                     <div class="w-24 h-24 rounded-full bg-gray-800 border-2 border-gray-700 group-hover:border-orange-500 group-hover:bg-orange-500/10 flex items-center justify-center transition-all duration-300">
-                        <svg class="w-10 h-10 text-gray-400 group-hover:text-orange-500" fill="currentColor" viewBox="0 0 24 24">
-                            <circle cx="12" cy="12" r="8"/>
-                        </svg>
+                        <i class="fas fa-hockey-puck text-4xl text-gray-400 group-hover:text-orange-500"></i>
                     </div>
                     <span class="mt-4 font-bold text-gray-300 group-hover:text-white">Ice Hockey</span>
                 </div>
 
                 <div class="flex flex-col items-center group opacity-50">
                     <div class="w-24 h-24 rounded-full bg-gray-900 border-2 border-gray-800 border-dashed flex items-center justify-center">
-                        <svg class="w-8 h-8 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
-                        </svg>
+                        <i class="fas fa-plus text-3xl text-gray-600"></i>
                     </div>
                     <span class="mt-4 font-bold text-gray-500">More Soon</span>
                 </div>
@@ -644,14 +579,12 @@
 
                 <!-- Success Message (Hidden by default) -->
                 <div id="success-message" class="hidden text-center py-4">
-                    <svg class="w-8 h-8 text-white mx-auto mb-2" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                    </svg>
+                    <i class="fas fa-check-circle text-3xl text-white mb-2"></i>
                     <h3 class="text-xl font-bold text-white">Welcome to the Team!</h3>
                     <p class="text-orange-100 text-sm">We've added you to the priority list. Watch your inbox.</p>
                 </div>
             </div>
-
+            
             <p class="mt-4 text-orange-200 text-sm opacity-80">Be among the first teams to simplify your game-day operations.</p>
         </div>
     </div>
@@ -661,27 +594,13 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row justify-between items-center">
                 <div class="flex items-center gap-2 mb-4 md:mb-0">
-                    <svg class="w-6 h-6 text-tigrr-orange" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
-                    </svg>
+                    <i class="fa-solid fa-tiger-symbol text-tigrr-orange text-2xl"></i>
                     <span class="font-display font-bold text-2xl text-white tracking-wide">TeamTigrr</span>
                 </div>
                 <div class="flex space-x-6 text-gray-400">
-                    <a href="#" class="hover:text-tigrr-orange transition-colors">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                        </svg>
-                    </a>
-                    <a href="#" class="hover:text-tigrr-orange transition-colors">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                        </svg>
-                    </a>
-                    <a href="#" class="hover:text-tigrr-orange transition-colors">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                        </svg>
-                    </a>
+                    <a href="#" class="hover:text-tigrr-orange transition-colors"><i class="fab fa-twitter text-xl"></i></a>
+                    <a href="#" class="hover:text-tigrr-orange transition-colors"><i class="fab fa-instagram text-xl"></i></a>
+                    <a href="#" class="hover:text-tigrr-orange transition-colors"><i class="fab fa-facebook text-xl"></i></a>
                 </div>
             </div>
             <div class="mt-8 border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between text-sm text-gray-500">
@@ -715,9 +634,9 @@
 
             // Validate
             if(emailInput.value && sportInput.value && roleInput.value) {
-                // Loading State with CSS spinner
+                // Loading State
                 const originalBtnText = submitBtn.innerHTML;
-                submitBtn.innerHTML = '<svg class="w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>';
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
                 submitBtn.classList.add('opacity-75', 'cursor-not-allowed');
 
                 // Backend API Call
