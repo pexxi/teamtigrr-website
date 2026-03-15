@@ -4,16 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TeamTigrr - Junior Sports Duty Management</title>
-    
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Google Fonts -->
+
+    <!-- Google Fonts: Bebas Neue (display) + Space Grotesk (body) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@300;400;500;600;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Font Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <script>
@@ -21,16 +21,18 @@
             theme: {
                 extend: {
                     colors: {
-                        tigrr: {
-                            orange: '#FF6B00',
-                            dark: '#111111',
-                            charcoal: '#1F1F1F',
-                            light: '#F3F4F6'
-                        }
+                        base: '#0a0a0a',
+                        surface: '#111111',
+                        elevated: '#1a1a1a',
+                        accent: '#e8622a',
+                        'text-primary': '#fafafa',
+                        'text-secondary': '#888888',
+                        'text-muted': '#555555',
+                        success: '#22c55e'
                     },
                     fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        display: ['Teko', 'sans-serif'],
+                        sans: ['Space Grotesk', 'sans-serif'],
+                        display: ['Bebas Neue', 'sans-serif'],
                     }
                 }
             }
@@ -38,626 +40,808 @@
     </script>
 
     <style>
-        /* Global overflow protection */
-        html, body {
-            overflow-x: hidden;
-            width: 100%;
-            margin: 0;
-            padding: 0;
+        *, *::before, *::after { box-sizing: border-box; }
+        html { overflow-x: hidden; }
+        body { overflow-x: hidden; }
+        @media (max-width: 767px) { img, video, svg { max-width: 100%; height: auto; } }
+
+        ::selection { background-color: #e8622a; color: white; }
+
+        /* Scroll-triggered fade-up animation */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        *, *::before, *::after {
-            box-sizing: border-box;
-        }
+        /* FAQ accordion */
+        details summary { list-style: none; cursor: pointer; }
+        details summary::-webkit-details-marker { display: none; }
+        details summary::marker { display: none; }
+        details[open] .chevron { transform: rotate(180deg); }
+        .chevron { transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
 
-        /* Ensure media doesn't overflow */
-        img, video, iframe, svg {
-            max-width: 100%;
-            height: auto;
-        }
-
-        /* Custom pattern for the Hero section */
-        .bg-pattern {
-            background-image: radial-gradient(#FF6B00 1px, transparent 1px);
-            background-size: 20px 20px;
-            opacity: 0.1;
-        }
-        
-        .clip-slant {
-            /* Mobile: smaller slant (5% = ~50px on typical mobile) */
-            clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%);
-        }
-
-        @media (min-width: 640px) {
-            .clip-slant {
-                /* Desktop: more dramatic slant */
-                clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
-            }
-        }
-
-        @media (min-width: 1024px) {
-            .clip-slant {
-                clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
-            }
-        }
-
-        .clip-slant-reverse {
-            clip-path: polygon(0 5%, 100% 0, 100% 100%, 0 100%);
-        }
-
-        @media (min-width: 640px) {
-            .clip-slant-reverse {
-                clip-path: polygon(0 10%, 100% 0, 100% 100%, 0 100%);
-            }
-        }
-
-        @media (min-width: 1024px) {
-            .clip-slant-reverse {
-                clip-path: polygon(0 15%, 100% 0, 100% 100%, 0 100%);
-            }
-        }
-
-        /* Hide default details marker in all browsers */
-        details summary::-webkit-details-marker {
-            display: none;
-        }
-        details summary::marker {
-            display: none;
-        }
+        /* Tactile button feedback */
+        .btn-tactile:active { transform: scale(0.98); }
+        .btn-tactile { transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
     </style>
 </head>
-<body class="bg-tigrr-dark text-white font-sans antialiased selection:bg-tigrr-orange selection:text-white">
+<body class="bg-base text-text-primary font-sans">
 
-    <!-- Navigation -->
-    <nav class="fixed w-full z-50 bg-tigrr-dark/95 backdrop-blur-sm border-b border-gray-800 transition-all duration-300" id="navbar">
+    <!-- ============================================ -->
+    <!-- 01. NAVIGATION                               -->
+    <!-- ============================================ -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 bg-base/95 backdrop-blur-md transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-20">
+            <div class="flex items-center justify-between h-16">
                 <!-- Logo -->
-                <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer" onclick="window.scrollTo(0,0)">
-                    <i class="fa-solid fa-tiger-symbol text-tigrr-orange text-3xl"></i>
-                    <span class="font-display font-bold text-3xl tracking-wide uppercase text-white">Team<span class="text-tigrr-orange">Tigrr</span></span>
-                </div>
-                
-                <!-- Desktop Menu -->
-                <div class="hidden md:block">
-                    <div class="ml-10 flex items-baseline space-x-8">
-                        <a href="#problem" class="hover:text-tigrr-orange transition-colors px-3 py-2 rounded-md font-medium">Why TeamTigrr?</a>
-                        <a href="#how-it-works" class="hover:text-tigrr-orange transition-colors px-3 py-2 rounded-md font-medium">How It Works</a>
-                        <a href="#features" class="hover:text-tigrr-orange transition-colors px-3 py-2 rounded-md font-medium">Features</a>
-                        <a href="#sports" class="hover:text-tigrr-orange transition-colors px-3 py-2 rounded-md font-medium">Sports</a>
-                        <a href="#faq" class="hover:text-tigrr-orange transition-colors px-3 py-2 rounded-md font-medium">FAQ</a>
-                        <a href="#join" class="bg-tigrr-orange hover:bg-orange-600 text-white px-5 py-2 min-h-[44px] inline-flex items-center rounded-full font-bold transition-transform hover:scale-105 transform">Get Early Access</a>
-                    </div>
+                <a href="#" class="flex items-center gap-2">
+                    <div class="w-8 h-8 bg-accent rounded-lg flex items-center justify-center text-white font-extrabold text-sm">T</div>
+                    <span class="font-bold text-lg text-text-primary">TeamTigrr</span>
+                </a>
+
+                <!-- Desktop Nav -->
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="#why" class="text-text-secondary hover:text-text-primary transition-colors text-base">Why TeamTigrr</a>
+                    <a href="#how" class="text-text-secondary hover:text-text-primary transition-colors text-base">How It Works</a>
+                    <a href="#features" class="text-text-secondary hover:text-text-primary transition-colors text-base">Features</a>
+                    <a href="#sports" class="text-text-secondary hover:text-text-primary transition-colors text-base">Sports</a>
+                    <a href="#faq" class="text-text-secondary hover:text-text-primary transition-colors text-base">FAQ</a>
                 </div>
 
-                <!-- Mobile menu button -->
-                <div class="-mr-2 flex md:hidden">
-                    <button type="button" onclick="toggleMobileMenu()" class="inline-flex items-center justify-center min-h-[44px] min-w-[44px] p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none">
-                        <i class="fas fa-bars text-xl"></i>
+                <!-- CTA + Mobile Toggle -->
+                <div class="flex items-center gap-3">
+                    <a href="#signup" class="hidden md:inline-flex bg-accent text-white px-5 py-2.5 rounded-lg text-sm font-semibold btn-tactile hover:bg-accent/90 min-h-[44px] items-center">Join Beta</a>
+                    <button onclick="toggleMobileMenu()" class="md:hidden min-w-[44px] min-h-[44px] flex items-center justify-center text-text-secondary">
+                        <i class="fas fa-bars text-lg"></i>
                     </button>
                 </div>
             </div>
         </div>
 
         <!-- Mobile Menu -->
-        <div class="hidden md:hidden bg-tigrr-charcoal border-b border-gray-700" id="mobile-menu">
-            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a href="#problem" class="text-gray-300 hover:text-white block px-3 py-2 min-h-[44px] flex items-center rounded-md text-base font-medium">Why TeamTigrr?</a>
-                <a href="#how-it-works" class="text-gray-300 hover:text-white block px-3 py-2 min-h-[44px] flex items-center rounded-md text-base font-medium">How It Works</a>
-                <a href="#features" class="text-gray-300 hover:text-white block px-3 py-2 min-h-[44px] flex items-center rounded-md text-base font-medium">Features</a>
-                <a href="#sports" class="text-gray-300 hover:text-white block px-3 py-2 min-h-[44px] flex items-center rounded-md text-base font-medium">Sports</a>
-                <a href="#faq" class="text-gray-300 hover:text-white block px-3 py-2 min-h-[44px] flex items-center rounded-md text-base font-medium">FAQ</a>
-                <a href="#join" class="text-tigrr-orange font-bold block px-3 py-2 min-h-[44px] flex items-center rounded-md text-base">Get Early Access</a>
+        <div id="mobile-menu" class="hidden md:hidden bg-base/98 backdrop-blur-md border-t border-elevated">
+            <div class="px-4 py-4 flex flex-col gap-1">
+                <a href="#why" onclick="toggleMobileMenu()" class="text-text-secondary hover:text-text-primary py-3 min-h-[44px] flex items-center text-base">Why TeamTigrr</a>
+                <a href="#how" onclick="toggleMobileMenu()" class="text-text-secondary hover:text-text-primary py-3 min-h-[44px] flex items-center text-base">How It Works</a>
+                <a href="#features" onclick="toggleMobileMenu()" class="text-text-secondary hover:text-text-primary py-3 min-h-[44px] flex items-center text-base">Features</a>
+                <a href="#sports" onclick="toggleMobileMenu()" class="text-text-secondary hover:text-text-primary py-3 min-h-[44px] flex items-center text-base">Sports</a>
+                <a href="#faq" onclick="toggleMobileMenu()" class="text-text-secondary hover:text-text-primary py-3 min-h-[44px] flex items-center text-base">FAQ</a>
+                <a href="#signup" onclick="toggleMobileMenu()" class="bg-accent text-white px-5 py-3 rounded-lg text-sm font-semibold text-center min-h-[44px] flex items-center justify-center mt-2 btn-tactile">Join Beta</a>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <div class="relative pt-20 overflow-hidden">
-        <div class="absolute inset-0 bg-pattern z-0"></div>
-        <div class="absolute top-0 right-0 -mt-20 -mr-20 w-96 h-96 bg-tigrr-orange rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
-        <div class="absolute bottom-0 left-0 -mb-20 -ml-20 w-96 h-96 bg-gray-600 rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
+    <!-- ============================================ -->
+    <!-- 02. HERO                                     -->
+    <!-- ============================================ -->
+    <section class="min-h-[100dvh] flex items-center pt-12 relative overflow-hidden">
+        <!-- Hero background photo -->
+        <div class="absolute inset-0" style="background: url('assets/images/hero.png') center/cover no-repeat;"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-base via-base/90 to-base/70"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center py-16 md:py-0">
+                <!-- Left: Text -->
+                <div class="fade-up">
+                    <div class="inline-flex items-center gap-2 mb-6">
+                        <div class="w-1.5 h-1.5 rounded-full bg-success"></div>
+                        <span class="text-sm tracking-widest uppercase text-text-secondary font-medium">Now accepting teams</span>
+                    </div>
 
-        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32 flex flex-col md:flex-row items-center">
-            <!-- Text Content -->
-            <div class="md:w-1/2 text-center md:text-left">
-                <div class="inline-block px-4 py-1 mb-6 rounded-full bg-orange-900/30 border border-orange-500/30 text-tigrr-orange font-semibold text-sm uppercase tracking-wider">
-                    <i class="fas fa-bolt mr-2"></i> Now in Private Beta
-                </div>
-                <h1 class="text-5xl md:text-7xl font-display font-bold leading-none mb-6">
-                    Duties Handled, <br>
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-tigrr-orange to-yellow-500">Effortlessly.</span>
-                </h1>
-                <p class="mt-4 text-xl text-gray-400 max-w-lg mx-auto md:mx-0">
-                    Duty scheduling for sports teams that actually works. Send one request, get instant responses, and keep every game covered.
-                </p>
-                
-                <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                    <a href="#join" class="bg-tigrr-orange hover:bg-orange-600 text-white px-8 py-4 rounded-lg font-bold text-lg transition-all shadow-lg shadow-orange-600/20 hover:shadow-orange-600/40 flex items-center justify-center">
-                        Get Early Access <i class="fas fa-arrow-right ml-2"></i>
-                    </a>
-                    <a href="#features" class="border border-gray-600 hover:border-gray-400 text-gray-300 hover:text-white px-8 py-4 rounded-lg font-bold text-lg transition-all flex items-center justify-center">
-                        See How It Works
-                    </a>
-                </div>
-                <p class="mt-4 text-sm text-gray-500">
-                    <i class="fas fa-check text-tigrr-orange mr-1"></i> Free beta access for early teams
-                </p>
-            </div>
+                    <h1 class="text-6xl md:text-8xl font-display tracking-tight leading-none text-text-primary">
+                        Game day.<br>Handled.
+                    </h1>
 
-            <!-- Hero Image / Visual -->
-            <div class="md:w-1/2 mt-12 md:mt-0 relative">
-                <div class="relative mx-auto w-full max-w-md lg:max-w-lg">
-                    <!-- Decorative back layers -->
-                    <div class="absolute top-0 -right-4 -left-4 h-full bg-gradient-to-r from-gray-800 to-gray-900 rounded-2xl transform rotate-6 opacity-60"></div>
-                    <div class="absolute top-0 -right-4 -left-4 h-full bg-gradient-to-r from-tigrr-orange to-orange-900 rounded-2xl transform -rotate-3 opacity-20"></div>
-                    
-                    <!-- Main Card -->
-                    <div class="relative bg-gray-800 border border-gray-700 rounded-2xl shadow-2xl overflow-hidden">
-                        <!-- Header of Fake App -->
-                        <div class="bg-gray-900 px-4 py-3 border-b border-gray-700 flex items-center justify-between">
-                            <span class="text-white font-bold"><i class="fas fa-basketball text-tigrr-orange mr-2"></i> Tigers U12 vs. Hawks</span>
-                            <span class="text-xs bg-green-500/20 text-green-400 px-2 py-1 rounded">Next Saturday</span>
+                    <p class="text-lg text-text-secondary mt-6 max-w-[480px] leading-relaxed">
+                        The duty management tool that junior sports teams actually want to use. Fair scheduling, instant responses, zero spreadsheets.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row gap-3 mt-8">
+                        <a href="#signup" class="bg-accent text-white px-6 py-3.5 rounded-lg text-base font-semibold btn-tactile hover:bg-accent/90 min-h-[44px] inline-flex items-center justify-center">
+                            Get Early Access
+                        </a>
+                        <a href="#how" class="border border-elevated text-text-secondary px-6 py-3.5 rounded-lg text-base hover:border-text-muted hover:text-text-primary transition-colors min-h-[44px] inline-flex items-center justify-center btn-tactile">
+                            See How It Works
+                        </a>
+                    </div>
+
+                    <div class="flex flex-wrap gap-x-6 gap-y-2 mt-6 text-sm text-text-muted">
+                        <div class="flex items-center gap-2">
+                            <div class="w-1 h-1 rounded-full bg-accent"></div>
+                            Free during beta
                         </div>
-                        <!-- List Items -->
-                        <div class="p-4 space-y-3">
-                            <!-- Item 1 -->
-                            <div class="flex items-center p-3 bg-gray-700/50 rounded-lg border border-gray-600">
-                                <div class="h-10 w-10 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400">
-                                    <i class="fas fa-stopwatch"></i>
-                                </div>
-                                <div class="ml-3 flex-1">
-                                    <p class="text-sm font-medium text-white">Game Clock</p>
-                                    <p class="text-xs text-gray-400">Assigned: <span class="text-white">Mike (Dad)</span></p>
-                                </div>
-                                <i class="fas fa-check-circle text-green-500"></i>
+                        <div class="flex items-center gap-2">
+                            <div class="w-1 h-1 rounded-full bg-accent"></div>
+                            5 min setup
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <div class="w-1 h-1 rounded-full bg-accent"></div>
+                            Works with any sport
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Phone Mockup -->
+                <div class="fade-up flex items-center justify-center relative" style="transition-delay: 0.15s;">
+                    <!-- Glow -->
+                    <div class="absolute w-64 h-64 rounded-full" style="background: radial-gradient(circle, rgba(232,98,42,0.1) 0%, transparent 70%);"></div>
+
+                    <!-- Phone Frame -->
+                    <div class="w-[260px] sm:w-[280px] bg-surface rounded-[2rem] border-2 border-elevated p-3 relative z-10">
+                        <!-- Notch -->
+                        <div class="w-20 h-1 bg-elevated rounded-full mx-auto mb-3"></div>
+
+                        <!-- App UI -->
+                        <div class="bg-base rounded-[1.25rem] p-4 flex flex-col gap-3">
+                            <!-- App Header -->
+                            <div class="text-center pb-3 border-b border-elevated">
+                                <div class="text-xs text-accent font-semibold tracking-wide uppercase">Next Game</div>
+                                <div class="text-base font-bold text-text-primary mt-0.5">Tigers U12 vs Hawks</div>
+                                <div class="text-xs text-text-muted mt-0.5">Saturday, 10:00 AM</div>
                             </div>
-                            <!-- Item 2 -->
-                            <div class="flex items-center p-3 bg-gray-700/50 rounded-lg border border-gray-600">
-                                <div class="h-10 w-10 rounded-full bg-purple-500/20 flex items-center justify-center text-purple-400">
-                                    <i class="fas fa-book"></i>
+
+                            <!-- Duty Items -->
+                            <div class="flex flex-col gap-2">
+                                <!-- Filled duty -->
+                                <div class="bg-surface rounded-lg p-3 flex items-center justify-between">
+                                    <div class="flex items-center gap-2.5">
+                                        <div class="w-7 h-7 rounded-full bg-elevated flex items-center justify-center text-[10px] text-text-secondary font-medium">MK</div>
+                                        <div>
+                                            <div class="text-sm text-text-primary font-semibold">Game Clock</div>
+                                            <div class="text-xs text-text-muted">Mike Korhonen</div>
+                                        </div>
+                                    </div>
+                                    <div class="w-2.5 h-2.5 rounded-full bg-success"></div>
                                 </div>
-                                <div class="ml-3 flex-1">
-                                    <p class="text-sm font-medium text-white">Scoring</p>
-                                    <p class="text-xs text-gray-400">Assigned: <span class="text-white">Sarah W.</span></p>
+
+                                <!-- Filled duty -->
+                                <div class="bg-surface rounded-lg p-3 flex items-center justify-between">
+                                    <div class="flex items-center gap-2.5">
+                                        <div class="w-7 h-7 rounded-full bg-elevated flex items-center justify-center text-[10px] text-text-secondary font-medium">SV</div>
+                                        <div>
+                                            <div class="text-sm text-text-primary font-semibold">Scoring</div>
+                                            <div class="text-xs text-text-muted">Sarah Virtanen</div>
+                                        </div>
+                                    </div>
+                                    <div class="w-2.5 h-2.5 rounded-full bg-success"></div>
                                 </div>
-                                <i class="fas fa-check-circle text-green-500"></i>
+
+                                <!-- Open duty -->
+                                <div class="bg-accent/5 border border-accent/15 rounded-lg p-3 flex items-center justify-between">
+                                    <div class="flex items-center gap-2.5">
+                                        <div class="w-7 h-7 rounded-full bg-accent/10 flex items-center justify-center text-[10px] text-accent font-bold">?</div>
+                                        <div>
+                                            <div class="text-sm text-accent font-semibold">Kiosk Duty</div>
+                                            <div class="text-xs text-accent/60">Needs volunteer</div>
+                                        </div>
+                                    </div>
+                                    <button class="bg-accent text-white px-3 py-1 rounded text-xs font-semibold">Take</button>
+                                </div>
                             </div>
-                            <!-- Item 3 (Alert) -->
-                            <div class="flex items-center p-3 bg-red-900/20 rounded-lg border border-red-500/30">
-                                <div class="h-10 w-10 rounded-full bg-red-500/20 flex items-center justify-center text-red-400">
-                                    <i class="fas fa-hamburger"></i>
+
+                            <!-- Bottom Nav -->
+                            <div class="flex justify-around pt-3 border-t border-elevated mt-1">
+                                <div class="text-center">
+                                    <i class="fas fa-calendar-alt text-accent text-xs"></i>
+                                    <div class="text-[10px] text-text-secondary mt-0.5">Games</div>
                                 </div>
-                                <div class="ml-3 flex-1">
-                                    <p class="text-sm font-medium text-white">Kiosk Duty</p>
-                                    <p class="text-xs text-red-300">Needs Volunteer!</p>
+                                <div class="text-center">
+                                    <i class="fas fa-users text-text-muted text-xs"></i>
+                                    <div class="text-[10px] text-text-muted mt-0.5">Team</div>
                                 </div>
-                                <button class="bg-red-500 hover:bg-red-600 text-white text-xs px-3 py-1 rounded transition-colors">Take</button>
+                                <div class="text-center">
+                                    <i class="fas fa-user text-text-muted text-xs"></i>
+                                    <div class="text-[10px] text-text-muted mt-0.5">Profile</div>
+                                </div>
                             </div>
                         </div>
-                        <!-- Notification Overlay simulation -->
-                        <div class="absolute bottom-4 left-4 right-4 bg-gray-900/95 backdrop-blur border border-tigrr-orange rounded-lg p-3 shadow-lg transform translate-y-2">
-                            <div class="flex items-start">
-                                <i class="fas fa-bell text-tigrr-orange mt-1"></i>
-                                <div class="ml-3">
-                                    <p class="text-sm font-bold text-white">Alert</p>
-                                    <p class="text-xs text-gray-300">John requested coverage for Sunday's game. Any takers?</p>
-                                </div>
-                            </div>
-                        </div>
+
+                        <!-- Home Indicator -->
+                        <div class="w-16 h-1 bg-elevated/60 rounded-full mx-auto mt-3"></div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- Social Proof Bar -->
-    <div class="bg-tigrr-charcoal border-y border-gray-800 py-6">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <p class="text-gray-400 text-lg">
-                <i class="fas fa-heart text-tigrr-orange mr-2"></i>
-                <span class="text-white font-semibold">Built by sports parents</span>
-                who were tired of the spreadsheet shuffle
+    <!-- ============================================ -->
+    <!-- 03. SOCIAL PROOF BAR                         -->
+    <!-- ============================================ -->
+    <section class="border-t border-elevated bg-surface">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <p class="text-center text-text-secondary text-base">
+                Trusted by team leaders across junior sports.
             </p>
         </div>
-    </div>
+    </section>
 
-    <!-- Why TeamTigrr Section -->
-    <div id="problem" class="bg-gray-100 text-gray-900 py-24 clip-slant relative z-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-3xl md:text-5xl font-display font-bold mb-4 uppercase">From Spreadsheets to Simplicity</h2>
-            <p class="text-lg text-gray-600 max-w-2xl mx-auto mb-12">
-                Managing volunteers shouldn't eat up your evenings. TeamTigrr handles the coordination so you can focus on the team.
-            </p>
-
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <!-- Before -->
-                <div class="relative group overflow-visible">
-                    <div class="absolute -top-6 left-0 sm:-left-6 bg-gray-500 text-white font-bold px-4 py-2 rounded-lg transform -rotate-12 shadow-xl z-30">Before</div>
-
-                    <div class="bg-white rounded-xl shadow-2xl border border-gray-300 overflow-hidden relative opacity-70 transition-all hover:scale-105 duration-300">
-                        <!-- Simulated Excel Header -->
-                        <div class="bg-[#217346] text-white p-2 text-xs font-semibold flex items-center gap-2">
-                            <i class="fas fa-file-excel"></i> Roster_U12_Final_v3_copy.xlsx
-                        </div>
-                        
-                        <!-- Excel Grid -->
-                        <div class="font-mono text-[10px] sm:text-xs overflow-x-auto bg-white border-b-4 border-gray-200">
-                            <table class="w-full text-left border-collapse">
-                                <tr class="bg-gray-100 text-gray-600">
-                                    <th class="border p-1 w-8 text-center">#</th>
-                                    <th class="border p-1">A</th>
-                                    <th class="border p-1">B</th>
-                                    <th class="border p-1">C</th>
-                                </tr>
-                                <tr>
-                                    <td class="border p-1 bg-gray-50 text-center font-bold text-gray-500">1</td>
-                                    <td class="border p-1 font-bold text-gray-800">Date</td>
-                                    <td class="border p-1 font-bold text-gray-800">Duty</td>
-                                    <td class="border p-1 font-bold text-gray-800">Status</td>
-                                </tr>
-                                <tr>
-                                    <td class="border p-1 bg-gray-50 text-center font-bold text-gray-500">2</td>
-                                    <td class="border p-1">Sat 10th</td>
-                                    <td class="border p-1">Scoring</td>
-                                    <td class="border p-1 text-red-600 font-bold">???</td>
-                                </tr>
-                                <tr>
-                                    <td class="border p-1 bg-gray-50 text-center font-bold text-gray-500">3</td>
-                                    <td class="border p-1">Sat 10th</td>
-                                    <td class="border p-1">Oranges</td>
-                                    <td class="border p-1">Mike</td>
-                                </tr>
-                            </table>
-                        </div>
-
-                        <!-- WhatsApp Overlay -->
-                        <div class="bg-[#ece5dd] p-4 h-48 relative overflow-hidden flex flex-col gap-3">
-                            <!-- Helper graphic for bg pattern -->
-                            <div class="absolute inset-0 opacity-5 bg-[url('https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/1200px-WhatsApp.svg.png')] bg-repeat bg-center bg-contain grayscale"></div>
-
-                            <!-- Message 1 -->
-                            <div class="self-start bg-white rounded-lg rounded-tl-none p-2 shadow-sm max-w-[85%] text-xs relative z-10">
-                                <div class="text-orange-800 font-bold text-[10px] mb-0.5">Coach Steve</div>
-                                <p class="text-gray-800">Guys, we still have no one for scoring tomorrow!! 😱 Who can help?</p>
-                                <span class="text-[9px] text-gray-400 block text-right mt-1">19:42</span>
-                            </div>
-
-                            <!-- Message 2 -->
-                            <div class="self-end bg-[#dcf8c6] rounded-lg rounded-tr-none p-2 shadow-sm max-w-[85%] text-xs relative z-10">
-                                <p class="text-gray-800">Sorry, working late. Ask the Smiths?</p>
-                                <span class="text-[9px] text-gray-500 block text-right mt-1">19:45 <i class="fas fa-check-double text-blue-400"></i></span>
-                            </div>
-
-                             <!-- Message 3 -->
-                            <div class="self-start bg-white rounded-lg rounded-tl-none p-2 shadow-sm max-w-[85%] text-xs relative z-10">
-                                <div class="text-purple-800 font-bold text-[10px] mb-0.5">Karen Smith</div>
-                                <p class="text-gray-800">I texted John but he hasn't replied... can someone else do it?</p>
-                                <span class="text-[9px] text-gray-400 block text-right mt-1">19:48</span>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <!-- Good Way -->
-                <div class="text-left space-y-6">
-                    <div class="flex">
-                        <div class="flex-shrink-0">
-                            <div class="flex items-center justify-center h-12 w-12 rounded-md bg-tigrr-orange text-white">
-                                <i class="fas fa-users-cog text-xl"></i>
-                            </div>
-                        </div>
-                        <div class="ml-4">
-                            <h3 class="text-xl font-bold text-gray-900">Fairness Built In</h3>
-                            <p class="mt-2 text-gray-600">AI helps distribute duties fairly across families based on past participation. No more keeping spreadsheets up to date.</p>
-                        </div>
-                    </div>
-                    <div class="flex">
-                        <div class="flex-shrink-0">
-                            <div class="flex items-center justify-center h-12 w-12 rounded-md bg-tigrr-dark text-white">
-                                <i class="fas fa-robot text-xl"></i>
-                            </div>
-                        </div>
-                        <div class="ml-4">
-                            <h3 class="text-xl font-bold text-gray-900">Never Chase Anyone</h3>
-                            <p class="mt-2 text-gray-600">Automatic reminders go out 2 days and 2 hours before game time. You won't have to send a single text.</p>
-                        </div>
-                    </div>
-                    <div class="flex">
-                        <div class="flex-shrink-0">
-                            <div class="flex items-center justify-center h-12 w-12 rounded-md bg-gray-500 text-white">
-                                <i class="fas fa-mobile-alt text-xl"></i>
-                            </div>
-                        </div>
-                        <div class="ml-4">
-                            <h3 class="text-xl font-bold text-gray-900">Always in Your Pocket</h3>
-                            <p class="mt-2 text-gray-600">Parents check duties on their phone and it syncs to their calendar automatically. Everything's right where they need it.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- How It Works Section -->
-    <div id="how-it-works" class="bg-tigrr-dark py-20">
+    <!-- ============================================ -->
+    <!-- 04. WHY TEAMTIGRR                            -->
+    <!-- ============================================ -->
+    <section id="why" class="py-20 md:py-28 bg-elevated/50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-tigrr-orange font-semibold tracking-wide uppercase text-sm">Simple Setup</h2>
-                <h2 class="text-3xl md:text-5xl font-display font-bold text-white mt-2">How It Works</h2>
-            </div>
-
-            <div class="grid md:grid-cols-3 gap-8 md:gap-12 max-w-4xl mx-auto">
-                <!-- Step 1 -->
-                <div class="text-center">
-                    <div class="flex items-center justify-center w-16 h-16 mx-auto bg-tigrr-orange rounded-full mb-6">
-                        <span class="text-2xl font-display font-bold text-white">1</span>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
+                <!-- Left: Text -->
+                <div class="fade-up">
+                    <div class="inline-flex items-center gap-2 mb-4">
+                        <div class="w-5 h-0.5 bg-accent"></div>
+                        <span class="text-sm tracking-widest uppercase text-accent font-semibold">Why TeamTigrr</span>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-3">Add Your Games</h3>
-                    <p class="text-gray-400">Import your season schedule or add games one by one. Takes about 5 minutes.</p>
+
+                    <h2 class="text-4xl md:text-6xl font-display tracking-tight leading-none text-text-primary">
+                        More time on the court.
+                    </h2>
+
+                    <p class="text-lg text-text-secondary mt-5 leading-relaxed max-w-[480px]">
+                        Running a junior sports team takes dedication. 
+                        TeamTigrr handles the coordination behind the scenes, so you can spend your energy where it counts.
+                    </p>
+
+                    <p class="text-base text-text-muted mt-4 italic border-l-2 border-accent/20 pl-4 max-w-[420px]">
+                        "Built by sports parents who know how much goes on behind every game."
+                    </p>
                 </div>
 
-                <!-- Step 2 -->
-                <div class="text-center">
-                    <div class="flex items-center justify-center w-16 h-16 mx-auto bg-tigrr-orange rounded-full mb-6">
-                        <span class="text-2xl font-display font-bold text-white">2</span>
+                <!-- Right: Stat Cards -->
+                <div class="fade-up flex flex-col gap-3" style="transition-delay: 0.1s;">
+                    <div class="flex items-center gap-4 p-5 bg-surface/50 rounded-xl border border-elevated">
+                        <div class="w-12 h-12 min-w-[48px] bg-accent/10 rounded-lg flex items-center justify-center text-accent font-mono font-extrabold text-lg">5m</div>
+                        <div>
+                            <div class="text-base text-text-primary font-semibold">Five minutes per week</div>
+                            <div class="text-sm text-text-secondary">That's all it takes to keep duties organized</div>
+                        </div>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-3">Assign Duties</h3>
-                    <p class="text-gray-400">Our smart assistant suggests fair assignments. You review and approve with one click.</p>
-                </div>
 
-                <!-- Step 3 -->
-                <div class="text-center">
-                    <div class="flex items-center justify-center w-16 h-16 mx-auto bg-tigrr-orange rounded-full mb-6">
-                        <span class="text-2xl font-display font-bold text-white">3</span>
+                    <div class="flex items-center gap-4 p-5 bg-surface/50 rounded-xl border border-elevated">
+                        <div class="w-12 h-12 min-w-[48px] bg-success/10 rounded-lg flex items-center justify-center text-success font-mono font-extrabold text-base">97%</div>
+                        <div>
+                            <div class="text-base text-text-primary font-semibold">No more no-shows</div>
+                            <div class="text-sm text-text-secondary">Automatic reminders and fair distribution do the work</div>
+                        </div>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-3">Relax</h3>
-                    <p class="text-gray-400">Parents get notified automatically. Swaps happen without your involvement.</p>
+
+                    <div class="flex items-center gap-4 p-5 bg-surface/50 rounded-xl border border-elevated">
+                        <div class="w-12 h-12 min-w-[48px] bg-accent/10 rounded-lg flex items-center justify-center text-accent font-mono font-extrabold text-lg">1x</div>
+                        <div>
+                            <div class="text-base text-text-primary font-semibold">One notification, duty filled</div>
+                            <div class="text-sm text-text-secondary">Parents respond directly - no group chat needed</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- Privacy Section -->
-    <div id="privacy" class="bg-tigrr-dark py-20 border-t border-gray-800">
+    <!-- ============================================ -->
+    <!-- 05. HOW IT WORKS                             -->
+    <!-- ============================================ -->
+    <section id="how" class="py-20 md:py-28 border-t border-elevated">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="max-w-3xl mx-auto text-center">
-                <div class="inline-block p-4 bg-gray-800 rounded-full mb-6">
-                    <i class="fas fa-shield-alt text-3xl text-tigrr-orange"></i>
+            <!-- Header -->
+            <div class="fade-up mb-16">
+                <div class="inline-flex items-center gap-2 mb-3">
+                    <div class="w-5 h-0.5 bg-accent"></div>
+                    <span class="text-sm tracking-widest uppercase text-accent font-semibold">How it works</span>
                 </div>
-                <h2 class="text-3xl md:text-4xl font-display font-bold text-white mb-4">Your Info Stays Yours</h2>
-                <p class="text-xl text-gray-400">
-                    Contact details stay private - visible only to those who need them.
-                    No public volunteer lists. No shared spreadsheets floating around.
-                </p>
+                <h2 class="text-4xl md:text-6xl font-display tracking-tight leading-none text-text-primary">
+                    Three steps to game day.
+                </h2>
+            </div>
+
+            <!-- Step 01: Text Left, Visual Right -->
+            <div class="fade-up grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 mb-16 md:mb-20 items-center">
+                <div>
+                    <div class="font-mono text-5xl font-extrabold text-accent/10 leading-none">01</div>
+                    <h3 class="text-2xl md:text-3xl font-display text-text-primary mt-2">Add your games</h3>
+                    <p class="text-base text-text-secondary mt-3 leading-relaxed max-w-[420px]">
+                        Import your season schedule or add games one by one. Set up the duties each game needs - scoreboard, kiosk, whatever your sport requires.
+                    </p>
+                    <div class="text-sm text-text-muted mt-4 flex items-center gap-2">
+                        <div class="w-1 h-1 rounded-full bg-accent"></div>
+                        Takes under 5 minutes
+                    </div>
+                </div>
+                <div class="relative rounded-2xl overflow-hidden border border-elevated bg-base">
+                    <img src="https://images.pexels.com/photos/5384620/pexels-photo-5384620.jpeg?auto=compress&cs=tinysrgb&w=800&h=500&fit=crop" alt="Basketball court" class="w-full h-64 object-cover opacity-40" loading="lazy">
+                    <div class="absolute inset-0 bg-gradient-to-t from-base via-base/80 to-transparent"></div>
+                    <div class="absolute bottom-4 left-4 right-4 bg-surface/90 backdrop-blur border border-elevated rounded-xl p-4">
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="text-xs font-semibold text-text-primary">Season 2026</div>
+                            <div class="text-xs text-accent font-medium">+ Add game</div>
+                        </div>
+                        <div class="flex flex-col gap-1.5">
+                            <div class="bg-base/80 rounded-lg px-3 py-2 flex items-center justify-between">
+                                <div>
+                                    <div class="text-xs font-medium text-text-primary">vs Hawks</div>
+                                    <div class="text-[10px] text-text-muted">Sat, Mar 21</div>
+                                </div>
+                                <div class="text-[10px] text-success font-medium">3/3 filled</div>
+                            </div>
+                            <div class="bg-base/80 rounded-lg px-3 py-2 flex items-center justify-between">
+                                <div>
+                                    <div class="text-xs font-medium text-text-primary">vs Eagles</div>
+                                    <div class="text-[10px] text-text-muted">Sat, Mar 28</div>
+                                </div>
+                                <div class="text-[10px] text-accent font-medium">1/3 filled</div>
+                            </div>
+                            <div class="bg-base/80 rounded-lg px-3 py-2 flex items-center justify-between">
+                                <div>
+                                    <div class="text-xs font-medium text-text-primary">vs Bears</div>
+                                    <div class="text-[10px] text-text-muted">Sat, Apr 4</div>
+                                </div>
+                                <div class="text-[10px] text-text-muted">Not started</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 02: Visual Left, Text Right -->
+            <div class="fade-up grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 mb-16 md:mb-20 items-center">
+                <div class="order-2 md:order-1 relative rounded-2xl overflow-hidden border border-elevated bg-base">
+                    <img src="https://images.pexels.com/photos/5384620/pexels-photo-5384620.jpeg?auto=compress&cs=tinysrgb&w=800&h=500&fit=crop" alt="Team sport" class="w-full h-64 object-cover opacity-40" loading="lazy">
+                    <div class="absolute inset-0 bg-gradient-to-t from-base via-base/80 to-transparent"></div>
+                    <div class="absolute bottom-4 left-4 right-4 bg-surface/90 backdrop-blur border border-elevated rounded-xl p-4">
+                        <div class="text-xs font-semibold text-text-primary mb-2">Smart Suggestions</div>
+                        <div class="flex flex-col gap-1.5">
+                            <div class="bg-base/80 rounded-lg px-3 py-2">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-5 h-5 rounded-full bg-elevated text-[8px] text-text-muted flex items-center justify-center font-medium">MK</div>
+                                        <span class="text-xs text-text-primary">Mike K.</span>
+                                    </div>
+                                    <span class="text-[10px] text-text-muted">2 duties</span>
+                                </div>
+                                <div class="mt-1.5 h-1.5 bg-elevated rounded-full">
+                                    <div class="h-full bg-accent/50 rounded-full" style="width: 35%;"></div>
+                                </div>
+                            </div>
+                            <div class="bg-base/80 rounded-lg px-3 py-2">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-5 h-5 rounded-full bg-elevated text-[8px] text-text-muted flex items-center justify-center font-medium">SV</div>
+                                        <span class="text-xs text-text-primary">Sarah V.</span>
+                                    </div>
+                                    <span class="text-[10px] text-text-muted">1 duty</span>
+                                </div>
+                                <div class="mt-1.5 h-1.5 bg-elevated rounded-full">
+                                    <div class="h-full bg-success/50 rounded-full" style="width: 18%;"></div>
+                                </div>
+                            </div>
+                            <div class="bg-base/80 rounded-lg px-3 py-2">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-5 h-5 rounded-full bg-elevated text-[8px] text-text-muted flex items-center justify-center font-medium">JL</div>
+                                        <span class="text-xs text-text-primary">Jukka L.</span>
+                                    </div>
+                                    <span class="text-[10px] text-accent">Suggested</span>
+                                </div>
+                                <div class="mt-1.5 h-1.5 bg-elevated rounded-full">
+                                    <div class="h-full bg-accent/30 rounded-full" style="width: 8%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="order-1 md:order-2">
+                    <div class="font-mono text-5xl font-extrabold text-accent/10 leading-none">02</div>
+                    <h3 class="text-2xl md:text-3xl font-display text-text-primary mt-2">Assign duties fairly</h3>
+                    <p class="text-base text-text-secondary mt-3 leading-relaxed max-w-[420px]">
+                        Smart suggestions distribute duties evenly across parents. One tap to confirm. No favoritism, no awkward conversations.
+                    </p>
+                    <div class="text-sm text-text-muted mt-4 flex items-center gap-2">
+                        <div class="w-1 h-1 rounded-full bg-accent"></div>
+                        AI-powered fair distribution
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 03: Text Left, Visual Right -->
+            <div class="fade-up grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+                <div>
+                    <div class="font-mono text-5xl font-extrabold text-accent/10 leading-none">03</div>
+                    <h3 class="text-2xl md:text-3xl font-display text-text-primary mt-2">Game day runs itself</h3>
+                    <p class="text-base text-text-secondary mt-3 leading-relaxed max-w-[420px]">
+                        Parents get notified automatically. Reminders go out at 2 days and 2 hours before game time. Swaps happen without your involvement.
+                    </p>
+                    <div class="text-sm text-text-muted mt-4 flex items-center gap-2">
+                        <div class="w-1 h-1 rounded-full bg-accent"></div>
+                        Automatic reminders and swaps
+                    </div>
+                </div>
+                <div class="relative rounded-2xl overflow-hidden border border-elevated bg-base">
+                    <img src="https://images.pexels.com/photos/29811410/pexels-photo-29811410.jpeg?auto=compress&cs=tinysrgb&w=800&h=500&fit=crop" alt="Team celebration" class="w-full h-64 object-cover opacity-40" loading="lazy">
+                    <div class="absolute inset-0 bg-gradient-to-t from-base via-base/80 to-transparent"></div>
+                    <div class="absolute bottom-4 left-4 right-4 bg-surface/90 backdrop-blur border border-elevated rounded-xl p-4">
+                        <div class="flex flex-col gap-1.5">
+                            <div class="bg-base/80 rounded-lg px-3 py-2 border-l-2 border-accent/40">
+                                <div class="text-[10px] text-text-muted">2 days before</div>
+                                <div class="text-xs text-text-primary mt-0.5">Reminder sent to Mike K.</div>
+                                <div class="text-[10px] text-success mt-0.5">Confirmed</div>
+                            </div>
+                            <div class="bg-base/80 rounded-lg px-3 py-2 border-l-2 border-accent/40">
+                                <div class="text-[10px] text-text-muted">2 hours before</div>
+                                <div class="text-xs text-text-primary mt-0.5">Final reminder sent</div>
+                                <div class="text-[10px] text-success mt-0.5">3/3 confirmed</div>
+                            </div>
+                            <div class="bg-base/80 rounded-lg px-3 py-2 border-l-2 border-success">
+                                <div class="text-[10px] text-text-muted">Game day</div>
+                                <div class="text-xs text-success font-medium mt-0.5">All duties covered.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- Features Section -->
-    <div id="features" class="bg-tigrr-charcoal py-24">
+    <!-- ============================================ -->
+    <!-- 06. FEATURES                                 -->
+    <!-- ============================================ -->
+    <section id="features" class="py-20 md:py-28 border-t border-elevated bg-surface">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-tigrr-orange font-semibold tracking-wide uppercase text-sm">Game Day Ready</h2>
-                <h2 class="text-3xl md:text-5xl font-display font-bold text-white mt-2">Built for Team Leaders</h2>
+            <!-- Header -->
+            <div class="fade-up mb-12">
+                <div class="inline-flex items-center gap-2 mb-3">
+                    <div class="w-5 h-0.5 bg-accent"></div>
+                    <span class="text-sm tracking-widest uppercase text-accent font-semibold">Features</span>
+                </div>
+                <h2 class="text-4xl md:text-6xl font-display tracking-tight leading-none text-text-primary">
+                    Built for the sidelines.
+                </h2>
             </div>
 
-            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                <!-- Feature 1: Quick Setup -->
-                <div class="bg-gray-800 rounded-xl p-8 border border-gray-700 hover:border-tigrr-orange transition-colors group">
-                    <div class="h-12 w-12 bg-gray-700 rounded-lg flex items-center justify-center mb-6 group-hover:bg-tigrr-orange transition-colors">
-                        <i class="fas fa-clipboard-list text-2xl text-white"></i>
+            <!-- Row 1: 60/40 -->
+            <div class="fade-up grid grid-cols-1 md:grid-cols-5 gap-4 mb-4">
+                <!-- Large: Fair by Design -->
+                <div class="md:col-span-3 bg-surface border border-elevated rounded-2xl p-6 md:p-8 hover:border-accent/30 transition-colors">
+                    <div class="text-xs uppercase tracking-widest text-accent font-semibold mb-3">Fair by Design</div>
+                    <h3 class="text-2xl font-display text-text-primary">Duties distributed evenly. Automatically.</h3>
+                    <p class="text-base text-text-secondary mt-2 leading-relaxed">
+                        The algorithm tracks who did what and when. No one gets stuck with kiosk duty every weekend.
+                    </p>
+                    <!-- Bar chart visual -->
+                    <div class="mt-6 bg-base rounded-xl p-4">
+                        <div class="text-xs text-text-muted mb-3">Duties per parent this season</div>
+                        <div class="flex items-end gap-1.5 h-12">
+                            <div class="flex-1 bg-accent/25 rounded-sm" style="height: 75%;"></div>
+                            <div class="flex-1 bg-accent/35 rounded-sm" style="height: 80%;"></div>
+                            <div class="flex-1 bg-accent/40 rounded-sm" style="height: 70%;"></div>
+                            <div class="flex-1 bg-accent/50 rounded-sm" style="height: 78%;"></div>
+                            <div class="flex-1 bg-accent/55 rounded-sm" style="height: 72%;"></div>
+                            <div class="flex-1 bg-accent/65 rounded-sm" style="height: 76%;"></div>
+                            <div class="flex-1 bg-accent rounded-sm" style="height: 74%;"></div>
+                        </div>
+                        <div class="text-xs text-text-muted mt-2">Balanced distribution across all parents</div>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-3">Ready in Minutes</h3>
-                    <p class="text-gray-400">Add your games, assign duties, done. Fair assignments happen automatically - no spreadsheet formulas required.</p>
                 </div>
 
-                <!-- Feature 2: Swaps -->
-                <div class="bg-gray-800 rounded-xl p-8 border border-gray-700 hover:border-tigrr-orange transition-colors group">
-                    <div class="h-12 w-12 bg-gray-700 rounded-lg flex items-center justify-center mb-6 group-hover:bg-tigrr-orange transition-colors">
-                        <i class="fas fa-hands-helping text-2xl text-white"></i>
+                <!-- Small: Ready in Minutes -->
+                <div class="md:col-span-2 bg-surface border border-elevated rounded-2xl p-6 md:p-8 hover:border-accent/30 transition-colors flex flex-col justify-between">
+                    <div>
+                        <div class="text-xs uppercase tracking-widest text-accent font-semibold mb-3">Ready in Minutes</div>
+                        <h3 class="text-2xl font-display text-text-primary">Set up your season in one sitting.</h3>
+                        <p class="text-base text-text-secondary mt-2 leading-relaxed">
+                            Add games, define duties, invite parents. Under 10 minutes from start to first assignment.
+                        </p>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-3">Swaps Made Simple</h3>
-                    <p class="text-gray-400">Can't make it? One tap sends a request to all available parents. Swap duties with another parent or find a volunteer - everyone gets an equal chance to help out. No more texting people one by one hoping someone says yes.</p>
+                    <div class="font-mono text-4xl font-extrabold text-accent/15 mt-6">~5 min</div>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <!-- Sports Section -->
-    <div id="sports" class="bg-tigrr-dark py-20 border-t border-gray-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-3xl font-display font-bold mb-12">Supported Sports</h2>
-            <div class="flex flex-wrap justify-center gap-8 md:gap-16">
-                
-                <div class="flex flex-col items-center group">
-                    <div class="w-24 h-24 rounded-full bg-gray-800 border-2 border-gray-700 group-hover:border-orange-500 group-hover:bg-orange-500/10 flex items-center justify-center transition-all duration-300">
-                        <i class="fas fa-basketball-ball text-4xl text-gray-400 group-hover:text-orange-500"></i>
+            <!-- Row 2: 40/60 -->
+            <div class="fade-up grid grid-cols-1 md:grid-cols-5 gap-4">
+                <!-- Small: Auto Reminders -->
+                <div class="md:col-span-2 bg-surface border border-elevated rounded-2xl p-6 md:p-8 hover:border-accent/30 transition-colors flex flex-col justify-between">
+                    <div>
+                        <div class="text-xs uppercase tracking-widest text-accent font-semibold mb-3">Auto Reminders</div>
+                        <h3 class="text-2xl font-display text-text-primary">Nobody forgets.</h3>
+                        <p class="text-base text-text-secondary mt-2 leading-relaxed">
+                            Automatic nudges at 2 days and 2 hours before game time. Parents stay informed without you lifting a finger.
+                        </p>
                     </div>
-                    <span class="mt-4 font-bold text-gray-300 group-hover:text-white">Basketball</span>
+                    <div class="flex gap-2 mt-6">
+                        <span class="bg-base rounded-lg px-3 py-1.5 text-sm text-text-secondary">2d before</span>
+                        <span class="bg-base rounded-lg px-3 py-1.5 text-sm text-text-secondary">2h before</span>
+                    </div>
                 </div>
 
-                <div class="flex flex-col items-center group">
-                    <div class="w-24 h-24 rounded-full bg-gray-800 border-2 border-gray-700 group-hover:border-orange-500 group-hover:bg-orange-500/10 flex items-center justify-center transition-all duration-300">
-                        <i class="fas fa-futbol text-4xl text-gray-400 group-hover:text-orange-500"></i>
+                <!-- Large: Easy Swaps -->
+                <div class="md:col-span-3 bg-surface border border-elevated rounded-2xl p-6 md:p-8 hover:border-accent/30 transition-colors">
+                    <div class="text-xs uppercase tracking-widest text-accent font-semibold mb-3">Easy Swaps</div>
+                    <h3 class="text-2xl font-display text-text-primary">Plans change. That is fine.</h3>
+                    <p class="text-base text-text-secondary mt-2 leading-relaxed">
+                        One tap to request a swap. The request goes out to all available parents equally - no back-channel deals, no guilt trips. First to respond gets it.
+                    </p>
+                    <!-- Swap flow visual -->
+                    <div class="mt-6 flex flex-col sm:flex-row items-start sm:items-center gap-3">
+                        <div class="bg-base rounded-lg px-4 py-2.5 text-sm text-text-primary border border-elevated">Can't make it</div>
+                        <div class="text-text-muted hidden sm:block"><i class="fas fa-arrow-right"></i></div>
+                        <div class="text-text-muted sm:hidden"><i class="fas fa-arrow-down"></i></div>
+                        <div class="bg-base rounded-lg px-4 py-2.5 text-sm text-text-primary border border-elevated">All parents notified</div>
+                        <div class="text-text-muted hidden sm:block"><i class="fas fa-arrow-right"></i></div>
+                        <div class="text-text-muted sm:hidden"><i class="fas fa-arrow-down"></i></div>
+                        <div class="bg-accent/10 rounded-lg px-4 py-2.5 text-sm text-accent border border-accent/20 font-medium">Covered</div>
                     </div>
-                    <span class="mt-4 font-bold text-gray-300 group-hover:text-white">Football</span>
                 </div>
-
-                <div class="flex flex-col items-center group">
-                    <div class="w-24 h-24 rounded-full bg-gray-800 border-2 border-gray-700 group-hover:border-orange-500 group-hover:bg-orange-500/10 flex items-center justify-center transition-all duration-300">
-                        <i class="fas fa-hockey-puck text-4xl text-gray-400 group-hover:text-orange-500"></i>
-                    </div>
-                    <span class="mt-4 font-bold text-gray-300 group-hover:text-white">Ice Hockey</span>
-                </div>
-
-                <div class="flex flex-col items-center group opacity-50">
-                    <div class="w-24 h-24 rounded-full bg-gray-900 border-2 border-gray-800 border-dashed flex items-center justify-center">
-                        <i class="fas fa-plus text-3xl text-gray-600"></i>
-                    </div>
-                    <span class="mt-4 font-bold text-gray-500">More Soon</span>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-    <!-- FAQ Section -->
-    <div id="faq" class="bg-tigrr-charcoal py-20 border-t border-gray-800">
-        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-display font-bold text-white">Frequently Asked Questions</h2>
-            </div>
-
-            <div class="divide-y divide-gray-700">
-                <!-- Question 1 - Open by default -->
-                <details class="group py-4" open>
-                    <summary class="flex items-center justify-between cursor-pointer list-none min-h-[44px]">
-                        <span class="text-lg font-semibold text-white">Is TeamTigrr free?</span>
-                        <svg class="w-5 h-5 text-gray-400 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                        </svg>
-                    </summary>
-                    <p class="mt-4 text-gray-400">Yes! During our beta period, TeamTigrr is completely free. We're looking for teams to help us refine the experience before our official launch.</p>
-                </details>
-
-                <!-- Question 2 -->
-                <details class="group py-4">
-                    <summary class="flex items-center justify-between cursor-pointer list-none min-h-[44px]">
-                        <span class="text-lg font-semibold text-white">How long does setup take?</span>
-                        <svg class="w-5 h-5 text-gray-400 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                        </svg>
-                    </summary>
-                    <p class="mt-4 text-gray-400">Most team leaders are up and running in under 10 minutes. Add your games, invite parents via a link, and you're ready to go.</p>
-                </details>
-
-                <!-- Question 3 -->
-                <details class="group py-4">
-                    <summary class="flex items-center justify-between cursor-pointer list-none min-h-[44px]">
-                        <span class="text-lg font-semibold text-white">What about privacy? Where does our data go?</span>
-                        <svg class="w-5 h-5 text-gray-400 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                        </svg>
-                    </summary>
-                    <p class="mt-4 text-gray-400">Your data stays yours. Contact details are only visible to team leaders and assigned duty partners. We never sell data or show public volunteer lists.</p>
-                </details>
-
-                <!-- Question 4 -->
-                <details class="group py-4">
-                    <summary class="flex items-center justify-between cursor-pointer list-none min-h-[44px]">
-                        <span class="text-lg font-semibold text-white">Can we switch from our current system?</span>
-                        <svg class="w-5 h-5 text-gray-400 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                        </svg>
-                    </summary>
-                    <p class="mt-4 text-gray-400">Absolutely. Whether you're using spreadsheets, WhatsApp, or another app, TeamTigrr works alongside your existing tools. Start small - try it for one team first.</p>
-                </details>
-
-                <!-- Question 5 -->
-                <details class="group py-4">
-                    <summary class="flex items-center justify-between cursor-pointer list-none min-h-[44px]">
-                        <span class="text-lg font-semibold text-white">What sports does TeamTigrr support?</span>
-                        <svg class="w-5 h-5 text-gray-400 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                        </svg>
-                    </summary>
-                    <p class="mt-4 text-gray-400">Currently basketball, football (soccer), and ice hockey. We're adding more sports based on user requests - just let us know what you need!</p>
-                </details>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- CTA Section -->
-    <div id="join" class="bg-gradient-to-br from-orange-600 to-orange-800 py-24 relative overflow-hidden">
-        <div class="absolute inset-0 bg-pattern opacity-10"></div>
-        <div class="max-w-4xl mx-auto px-4 text-center relative z-10">
-            <h2 class="text-4xl md:text-6xl font-display font-bold text-white mb-6">Ready to Simplify Game Day?</h2>
-            <p class="text-orange-100 text-lg mb-8 max-w-2xl mx-auto">
-                We are currently accepting a limited number of clubs for our private beta. Get full access for free in exchange for your feedback.
-            </p>
-
-            <!-- Signup Form -->
-            <div id="signup-container" class="bg-white/10 backdrop-blur-md p-4 rounded-xl max-w-lg mx-auto border border-white/20">
-                <form id="email-form" class="flex flex-col gap-3">
-                    <input
-                        type="email"
-                        id="email-input"
-                        required
-                        placeholder="Enter your email address"
-                        class="w-full px-4 py-3 rounded-lg bg-gray-900 text-white placeholder-gray-400 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-orange-400 transition-all"
-                    >
-                    <div class="flex flex-col sm:flex-row gap-3">
-                        <select
-                            id="sport-input"
-                            required
-                            class="flex-1 pl-4 pr-10 py-3 rounded-lg bg-gray-900 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-orange-400 transition-all appearance-none bg-[url('data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2020%2020%22%20fill%3D%22%239ca3af%22%3E%3Cpath%20fill-rule%3D%22evenodd%22%20d%3D%22M5.22%208.22a.75.75%200%200%201%201.06%200L10%2011.94l3.72-3.72a.75.75%200%201%201%201.06%201.06l-4.25%204.25a.75.75%200%200%201-1.06%200L5.22%209.28a.75.75%200%200%201%200-1.06Z%22%20clip-rule%3D%22evenodd%22%2F%3E%3C%2Fsvg%3E')] bg-[length:1.5rem_1.5rem] bg-[right_0.5rem_center] bg-no-repeat"
-                        >
-                            <option value="" disabled selected>Select your sport</option>
-                            <option value="basketball">Basketball</option>
-                            <option value="football">Football</option>
-                            <option value="hockey">Ice Hockey</option>
-                            <option value="other">Other</option>
-                        </select>
-                        <select
-                            id="role-input"
-                            required
-                            class="flex-1 pl-4 pr-10 py-3 rounded-lg bg-gray-900 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-orange-400 transition-all appearance-none bg-[url('data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2020%2020%22%20fill%3D%22%239ca3af%22%3E%3Cpath%20fill-rule%3D%22evenodd%22%20d%3D%22M5.22%208.22a.75.75%200%200%201%201.06%200L10%2011.94l3.72-3.72a.75.75%200%201%201%201.06%201.06l-4.25%204.25a.75.75%200%200%201-1.06%200L5.22%209.28a.75.75%200%200%201%200-1.06Z%22%20clip-rule%3D%22evenodd%22%2F%3E%3C%2Fsvg%3E')] bg-[length:1.5rem_1.5rem] bg-[right_0.5rem_center] bg-no-repeat"
-                        >
-                            <option value="" disabled selected>Your role</option>
-                            <option value="team-leader">Team Leader</option>
-                            <option value="club-manager">Club Manager</option>
-                            <option value="parent">Parent</option>
-                            <option value="volunteer">Volunteer</option>
-                        </select>
-                    </div>
-                    <button
-                        type="submit"
-                        id="submit-btn"
-                        class="w-full bg-white text-orange-700 hover:bg-gray-100 font-bold px-8 py-4 rounded-lg transition-colors flex items-center justify-center"
-                    >
-                        <span>Get Early Access</span>
-                    </button>
-                </form>
-
-                <!-- Success Message (Hidden by default) -->
-                <div id="success-message" class="hidden text-center py-4">
-                    <i class="fas fa-check-circle text-3xl text-white mb-2"></i>
-                    <h3 class="text-xl font-bold text-white">Welcome to the Team!</h3>
-                    <p class="text-orange-100 text-sm">We've added you to the priority list. Watch your inbox.</p>
-                </div>
-            </div>
-            
-            <p class="mt-4 text-orange-200 text-sm opacity-80">Be among the first teams to simplify your game-day operations.</p>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <footer class="bg-tigrr-dark border-t border-gray-800 pt-16 pb-8">
+    <!-- ============================================ -->
+    <!-- 07. PRIVACY                                  -->
+    <!-- ============================================ -->
+    <section class="py-20 md:py-28 border-t border-elevated">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <div class="flex items-center gap-2 mb-4 md:mb-0">
-                    <i class="fa-solid fa-tiger-symbol text-tigrr-orange text-2xl"></i>
-                    <span class="font-display font-bold text-2xl text-white tracking-wide">TeamTigrr</span>
+            <div class="fade-up grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
+                <!-- Left: Text -->
+                <div>
+                    <div class="inline-flex items-center gap-2 mb-4">
+                        <div class="w-5 h-0.5 bg-accent"></div>
+                        <span class="text-sm tracking-widest uppercase text-accent font-semibold">Privacy first</span>
+                    </div>
+                    <h2 class="text-4xl md:text-6xl font-display tracking-tight leading-none text-text-primary">
+                        Your team's data <br/>stays with your team.
+                    </h2>
+                    <p class="text-lg text-text-secondary mt-5 leading-relaxed max-w-[480px]">
+                        Contact details are visible only to those who need them. No public volunteer lists. No shared spreadsheets floating around.
+                    </p>
                 </div>
-                <div class="flex space-x-4 text-gray-400">
-                    <a href="#" class="hover:text-tigrr-orange transition-colors min-w-[44px] min-h-[44px] inline-flex items-center justify-center"><i class="fab fa-twitter text-xl"></i></a>
-                    <a href="#" class="hover:text-tigrr-orange transition-colors min-w-[44px] min-h-[44px] inline-flex items-center justify-center"><i class="fab fa-instagram text-xl"></i></a>
-                    <a href="#" class="hover:text-tigrr-orange transition-colors min-w-[44px] min-h-[44px] inline-flex items-center justify-center"><i class="fab fa-facebook text-xl"></i></a>
+
+                <!-- Right: Checklist -->
+                <div class="flex flex-col">
+                    <div class="flex items-center gap-3 py-5 border-t border-elevated">
+                        <div class="w-2.5 h-2.5 rounded-full bg-success"></div>
+                        <span class="text-base text-text-primary">Private by default</span>
+                    </div>
+                    <div class="flex items-center gap-3 py-5 border-t border-elevated">
+                        <div class="w-2.5 h-2.5 rounded-full bg-success"></div>
+                        <span class="text-base text-text-primary">Contact details visible only when assigned</span>
+                    </div>
+                    <div class="flex items-center gap-3 py-5 border-t border-b border-elevated">
+                        <div class="w-2.5 h-2.5 rounded-full bg-success"></div>
+                        <span class="text-base text-text-primary">No data shared with third parties</span>
+                    </div>
                 </div>
             </div>
-            <div class="mt-8 border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between text-sm text-gray-500">
-                <p>&copy; 2026 TeamTigrr. All rights reserved.</p>
-                <div class="flex space-x-6 mt-4 md:mt-0">
-                    <a href="#" class="hover:text-white py-2 min-h-[44px] inline-flex items-center">Privacy Policy</a>
-                    <a href="#" class="hover:text-white py-2 min-h-[44px] inline-flex items-center">Terms of Service</a>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- 08. SUPPORTED SPORTS                         -->
+    <!-- ============================================ -->
+    <section id="sports" class="py-20 md:py-28 border-t border-elevated bg-elevated/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="fade-up mb-12">
+                <div class="inline-flex items-center gap-2 mb-3">
+                    <div class="w-5 h-0.5 bg-accent"></div>
+                    <span class="text-sm tracking-widest uppercase text-accent font-semibold">Sports</span>
                 </div>
+                <h2 class="text-4xl md:text-6xl font-display tracking-tight leading-none text-text-primary">
+                    Works with your sport.
+                </h2>
+            </div>
+
+            <!-- Row 1: 2fr + 1fr -->
+            <div class="fade-up grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                <div class="md:col-span-2 rounded-2xl p-8 min-h-[240px] flex flex-col justify-end relative overflow-hidden border border-elevated" style="background: url('assets/images/basketball-card.jpg') center/cover no-repeat;">
+                    <div class="absolute inset-0 bg-gradient-to-t from-base via-base/80 to-base/30"></div>
+                    <div class="absolute top-4 right-4 font-mono text-6xl font-black text-accent/10 z-10">01</div>
+                    <div class="relative z-10">
+                        <div class="text-xs uppercase tracking-widest text-accent font-semibold">Most Popular</div>
+                        <h3 class="text-3xl font-display text-text-primary mt-1">Basketball</h3>
+                        <p class="text-sm text-text-secondary mt-1">Scoreboard, timekeeping, kiosk</p>
+                    </div>
+                </div>
+                <div class="rounded-2xl p-6 min-h-[200px] flex flex-col justify-end relative overflow-hidden border border-elevated" style="background: url('assets/images/football-card.jpg') center/cover no-repeat;">
+                    <div class="absolute inset-0 bg-gradient-to-t from-base via-base/80 to-base/30"></div>
+                    <div class="relative z-10">
+                        <h3 class="text-2xl font-display text-text-primary">Football</h3>
+                        <p class="text-sm text-text-secondary mt-1">Referee, kiosk</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Row 2: 1fr + 2fr -->
+            <div class="fade-up grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="rounded-2xl p-6 min-h-[200px] flex flex-col justify-end relative overflow-hidden border border-elevated" style="background: url('assets/images/hockey-card.jpg') center/cover no-repeat;">
+                    <div class="absolute inset-0 bg-gradient-to-t from-base via-base/80 to-base/30"></div>
+                    <div class="relative z-10">
+                        <h3 class="text-2xl font-display text-text-primary">Ice Hockey</h3>
+                        <p class="text-sm text-text-secondary mt-1">Timekeeper, scoreboard, kiosk</p>
+                    </div>
+                </div>
+                <div class="md:col-span-2 rounded-2xl p-8 min-h-[160px] flex items-center gap-4 border border-dashed border-elevated/60">
+                    <div class="w-12 h-12 rounded-full bg-surface border border-elevated flex items-center justify-center text-text-muted text-lg">
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-display text-text-secondary">More sports coming</h3>
+                        <p class="text-sm text-text-muted mt-0.5">Tell us what you need - we're expanding based on demand</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- 09. FAQ                                      -->
+    <!-- ============================================ -->
+    <section id="faq" class="py-20 md:py-28 border-t border-elevated">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-[720px]">
+                <div class="fade-up mb-10">
+                    <div class="inline-flex items-center gap-2 mb-3">
+                        <div class="w-5 h-0.5 bg-accent"></div>
+                        <span class="text-sm tracking-widest uppercase text-accent font-semibold">FAQ</span>
+                    </div>
+                    <h2 class="text-4xl md:text-6xl font-display tracking-tight leading-none text-text-primary">
+                        Common questions.
+                    </h2>
+                </div>
+
+                <div class="fade-up">
+                    <details open class="border-t border-elevated group">
+                        <summary class="py-5 flex items-center justify-between cursor-pointer min-h-[44px]">
+                            <span class="text-base font-semibold text-text-primary">Is TeamTigrr free?</span>
+                            <svg class="chevron w-5 h-5 text-text-muted flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                        </summary>
+                        <div class="pb-5 text-base text-text-secondary leading-relaxed">
+                            Yes - completely free during our beta period. We're looking for teams to help us shape the product, and your feedback is the price of admission.
+                        </div>
+                    </details>
+
+                    <details class="border-t border-elevated group">
+                        <summary class="py-5 flex items-center justify-between cursor-pointer min-h-[44px]">
+                            <span class="text-base font-semibold text-text-secondary group-open:text-text-primary transition-colors">How long does setup take?</span>
+                            <svg class="chevron w-5 h-5 text-text-muted flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                        </summary>
+                        <div class="pb-5 text-base text-text-secondary leading-relaxed">
+                            Under 10 minutes. Add your games, set up the duties each game needs, and invite your team's parents. The smart assistant handles the rest.
+                        </div>
+                    </details>
+
+                    <details class="border-t border-elevated group">
+                        <summary class="py-5 flex items-center justify-between cursor-pointer min-h-[44px]">
+                            <span class="text-base font-semibold text-text-secondary group-open:text-text-primary transition-colors">What about privacy?</span>
+                            <svg class="chevron w-5 h-5 text-text-muted flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                        </summary>
+                        <div class="pb-5 text-base text-text-secondary leading-relaxed">
+                            Your data stays private. Contact details are only visible to the people who need them for their assigned duties. We don't sell data or create public volunteer lists.
+                        </div>
+                    </details>
+
+                    <details class="border-t border-elevated group">
+                        <summary class="py-5 flex items-center justify-between cursor-pointer min-h-[44px]">
+                            <span class="text-base font-semibold text-text-secondary group-open:text-text-primary transition-colors">Can we keep using our current tools alongside TeamTigrr?</span>
+                            <svg class="chevron w-5 h-5 text-text-muted flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                        </summary>
+                        <div class="pb-5 text-base text-text-secondary leading-relaxed">
+                            Absolutely. TeamTigrr works alongside whatever you're already using. No need to switch everything at once - start with one team and see how it goes.
+                        </div>
+                    </details>
+
+                    <details class="border-t border-b border-elevated group">
+                        <summary class="py-5 flex items-center justify-between cursor-pointer min-h-[44px]">
+                            <span class="text-base font-semibold text-text-secondary group-open:text-text-primary transition-colors">What sports are supported?</span>
+                            <svg class="chevron w-5 h-5 text-text-muted flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                        </summary>
+                        <div class="pb-5 text-base text-text-secondary leading-relaxed">
+                            Currently basketball, football, and ice hockey. We're adding more sports based on demand - if yours isn't listed, let us know and we'll prioritize it.
+                        </div>
+                    </details>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- 10. CTA / SIGNUP                             -->
+    <!-- ============================================ -->
+    <section id="signup" class="py-20 md:py-28 relative overflow-hidden">
+        <div class="absolute inset-0" style="background: url('assets/images/football-cta.jpg') center/cover no-repeat;"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-base via-base/90 to-base/70"></div>
+        <div class="absolute top-0 left-0 right-0 h-px" style="background: linear-gradient(to right, rgba(232,98,42,0.2), transparent 50%);"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
+                <div class="fade-up">
+                    <h2 class="text-5xl md:text-7xl font-display tracking-tight leading-none text-text-primary">
+                        Ready for<br>game day?
+                    </h2>
+                    <p class="text-lg text-text-secondary mt-5 leading-relaxed max-w-[420px]">
+                        We're accepting a limited number of teams for our private beta. Full access, completely free, in exchange for your honest feedback.
+                    </p>
+                    <div class="flex gap-6 mt-5 text-sm text-text-muted">
+                        <div class="flex items-center gap-2">
+                            <div class="w-1.5 h-1.5 rounded-full bg-success"></div>
+                            Limited spots
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <div class="w-1.5 h-1.5 rounded-full bg-success"></div>
+                            Free during beta
+                        </div>
+                    </div>
+                </div>
+
+                <div class="fade-up" style="transition-delay: 0.1s;">
+                    <div class="bg-surface/80 backdrop-blur-md border border-elevated rounded-2xl p-6 md:p-8">
+                        <h3 class="text-2xl font-display text-text-primary mb-5">Join the beta</h3>
+
+                        <form id="email-form" class="flex flex-col gap-4">
+                            <div>
+                                <label for="email-input" class="text-sm text-text-secondary mb-1.5 block">Email</label>
+                                <input type="email" id="email-input" required placeholder="your@email.com" class="w-full bg-base border border-elevated rounded-lg px-4 py-3 text-base text-text-primary placeholder-text-muted focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent/50 transition-all min-h-[44px]">
+                            </div>
+
+                            <div>
+                                <label for="sport-input" class="text-sm text-text-secondary mb-1.5 block">Sport</label>
+                                <select id="sport-input" required class="w-full bg-base border border-elevated rounded-lg px-4 py-3 text-base text-text-primary focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent/50 transition-all min-h-[44px] appearance-none" style="background-image: url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 fill=%22none%22 viewBox=%220 0 24 24%22 stroke=%22%23555%22 stroke-width=%222%22><path stroke-linecap=%22round%22 stroke-linejoin=%22round%22 d=%22M19 9l-7 7-7-7%22/></svg>'); background-repeat: no-repeat; background-position: right 12px center; background-size: 16px;">
+                                    <option value="" disabled selected class="text-text-muted">Select sport</option>
+                                    <option value="basketball">Basketball</option>
+                                    <option value="football">Football</option>
+                                    <option value="hockey">Ice Hockey</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label for="role-input" class="text-sm text-text-secondary mb-1.5 block">Your role</label>
+                                <select id="role-input" required class="w-full bg-base border border-elevated rounded-lg px-4 py-3 text-base text-text-primary focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent/50 transition-all min-h-[44px] appearance-none" style="background-image: url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 fill=%22none%22 viewBox=%220 0 24 24%22 stroke=%22%23555%22 stroke-width=%222%22><path stroke-linecap=%22round%22 stroke-linejoin=%22round%22 d=%22M19 9l-7 7-7-7%22/></svg>'); background-repeat: no-repeat; background-position: right 12px center; background-size: 16px;">
+                                    <option value="" disabled selected class="text-text-muted">Select role</option>
+                                    <option value="team-leader">Team Leader</option>
+                                    <option value="club-manager">Club Manager</option>
+                                    <option value="parent">Parent</option>
+                                    <option value="volunteer">Volunteer</option>
+                                </select>
+                            </div>
+
+                            <button type="submit" id="submit-btn" class="bg-accent text-white py-3.5 rounded-lg text-base font-semibold btn-tactile hover:bg-accent/90 min-h-[44px] mt-1 transition-all">
+                                Get Early Access
+                            </button>
+                        </form>
+
+                        <div id="success-message" class="hidden text-center py-8">
+                            <div class="w-12 h-12 bg-success/15 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-check text-success text-lg"></i>
+                            </div>
+                            <h4 class="text-2xl font-display text-text-primary">Welcome to the team.</h4>
+                            <p class="text-base text-text-secondary mt-2">We'll be in touch soon with your beta access.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- 11. FOOTER                                   -->
+    <!-- ============================================ -->
+    <footer class="border-t border-elevated">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                <div class="flex items-center gap-2">
+                    <div class="w-6 h-6 bg-accent rounded flex items-center justify-center text-white font-extrabold text-[10px]">T</div>
+                    <span class="font-bold text-base text-text-primary">TeamTigrr</span>
+                </div>
+                <div class="flex gap-6 text-sm text-text-muted">
+                    <a href="#" class="hover:text-text-secondary transition-colors min-h-[44px] flex items-center">Privacy</a>
+                    <a href="#" class="hover:text-text-secondary transition-colors min-h-[44px] flex items-center">Terms</a>
+                    <a href="#" class="hover:text-text-secondary transition-colors min-h-[44px] flex items-center">Contact</a>
+                </div>
+                <div class="text-sm text-text-muted/60">&copy; 2026 TeamTigrr</div>
             </div>
         </div>
     </footer>
 
-    <!-- Scripts -->
+    <!-- ============================================ -->
+    <!-- SCRIPTS                                      -->
+    <!-- ============================================ -->
     <script>
         // Mobile Menu Toggle
         function toggleMobileMenu() {
@@ -676,14 +860,12 @@
         form.addEventListener('submit', (e) => {
             e.preventDefault();
 
-            // Validate
-            if(emailInput.value && sportInput.value && roleInput.value) {
-                // Loading State
+            if (emailInput.value && sportInput.value && roleInput.value) {
                 const originalBtnText = submitBtn.innerHTML;
                 submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
                 submitBtn.classList.add('opacity-75', 'cursor-not-allowed');
+                submitBtn.disabled = true;
 
-                // Backend API Call
                 const scriptURL = 'https://script.google.com/macros/s/AKfycbyZ8m18vGOB9kB-uLJGvAREkg68a09VYc2rsiKAp4BKO80B94-3_HwZ3b4GWKL8YeT3/exec';
                 const formData = new FormData();
                 formData.append('email', emailInput.value);
@@ -692,17 +874,19 @@
 
                 fetch(scriptURL, { method: 'POST', body: formData })
                     .then(response => {
-                        // Hide Form, Show Success
                         form.classList.add('hidden');
                         successMessage.classList.remove('hidden');
-                        console.log('Success!', response);
                     })
                     .catch(error => {
-                        console.error('Error!', error.message);
-                        // Revert button state on error so they can try again
+                        console.error('Error:', error.message);
                         submitBtn.innerHTML = originalBtnText;
                         submitBtn.classList.remove('opacity-75', 'cursor-not-allowed');
-                        alert('Something went wrong. Please try again.');
+                        submitBtn.disabled = false;
+                        const errorEl = document.createElement('p');
+                        errorEl.className = 'text-red-400 text-sm mt-2 text-center';
+                        errorEl.textContent = 'Something went wrong. Please try again.';
+                        submitBtn.parentNode.appendChild(errorEl);
+                        setTimeout(() => errorEl.remove(), 5000);
                     });
             }
         });
@@ -712,12 +896,27 @@
             const navbar = document.getElementById('navbar');
             if (window.scrollY > 50) {
                 navbar.classList.add('shadow-lg');
-                navbar.classList.replace('bg-tigrr-dark/95', 'bg-tigrr-dark/100');
+                navbar.style.backgroundColor = 'rgba(10, 10, 10, 1)';
             } else {
                 navbar.classList.remove('shadow-lg');
-                navbar.classList.replace('bg-tigrr-dark/100', 'bg-tigrr-dark/95');
+                navbar.style.backgroundColor = 'rgba(10, 10, 10, 0.95)';
             }
         });
+
+        // Scroll-triggered fade-up animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -40px 0px'
+        });
+
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
     </script>
 </body>
 </html>
